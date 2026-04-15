@@ -1,6 +1,39 @@
-# Module 02 — Intermediate Workflows: Branching, Merging & Stashing
+<div align="center">
 
-## Learning Objectives
+<h1>Module 02 — Intermediate Workflows</h1>
+<h3>Branching, Merging & Stashing</h3>
+
+[![Module](https://img.shields.io/badge/Module-02%20of%2005-blue.svg)](../README.md)
+[![Level](https://img.shields.io/badge/Level-Intermediate-yellow.svg)](#)
+[![Commands](https://img.shields.io/badge/Commands-15-purple.svg)](#3-the-cheat-code-section)
+[![Diagrams](https://img.shields.io/badge/Diagrams-3%20gitGraphs-teal.svg)](#2-visual-diagrams)
+[![Lab](https://img.shields.io/badge/Lab-Feature%20Branch%20Workflow-orange.svg)](#4-hands-on-lab)
+[![Free](https://img.shields.io/badge/License-MIT-blue.svg)](../LICENSE)
+
+**[← 01 Foundations](../01-Foundations/README.md) · [Course Home](../README.md) · [03 Remote Collaboration →](../03-Remote-Collaboration/README.md)**
+
+</div>
+
+---
+
+## 📋 Module Contents
+
+- [Learning Objectives](#-learning-objectives)
+- [1. Theoretical Explanation](#1-theoretical-explanation)
+  - [Branches as Lightweight Pointers](#branches-as-lightweight-pointers)
+  - [HEAD: Where You Are](#head-where-you-are-right-now)
+  - [git switch vs git checkout](#git-switch-modern-vs-git-checkout-legacy)
+  - [Fast-Forward Merge](#fast-forward-merge)
+  - [3-Way Merge](#3-way-recursive-merge)
+  - [Squash Merge](#squash-merge)
+  - [Stash](#stash-your-uncommitted-work-clipboard)
+- [2. Visual Diagrams](#2-visual-diagrams)
+- [3. The "Cheat Code" Section](#3-the-cheat-code-section)
+- [4. Hands-on Lab](#4-hands-on-lab)
+
+---
+
+## 🎯 Learning Objectives
 
 By the end of this module you will be able to:
 
@@ -214,6 +247,14 @@ Your `wip.txt` is back, staged and ready.
 
 ---
 
-**Previous:** [01-Foundations ←](../01-Foundations/README.md)  
-**Next:** [03-Remote-Collaboration →](../03-Remote-Collaboration/README.md)  
-**Cheat Sheet:** [Full Command Reference →](../CHEATSHEET.md)
+<div align="center">
+
+| ← Previous | Home | Next → |
+|:---:|:---:|:---:|
+| [01 — Foundations](../01-Foundations/README.md) | [📖 Course Home](../README.md) | [03 — Remote Collaboration](../03-Remote-Collaboration/README.md) |
+
+**[📋 Full Cheat Sheet](../CHEATSHEET.md) · [🛠️ Practice Lab](../Practice-Lab/README.md) · [📄 License](../LICENSE)**
+
+*Part of the free, open-source [Git-Mastery-Hub](../README.md) curriculum — MIT Licensed.*
+
+</div>

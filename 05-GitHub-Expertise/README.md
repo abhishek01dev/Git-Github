@@ -1,6 +1,49 @@
-# Module 05 — GitHub Expertise: Actions, Wikis, Projects & GitHub Pages
+<div align="center">
 
-## Learning Objectives
+<h1>Module 05 — GitHub Expertise</h1>
+<h3>Actions, Wikis, Projects & GitHub Pages</h3>
+
+[![Module](https://img.shields.io/badge/Module-05%20of%2005-blue.svg)](../README.md)
+[![Level](https://img.shields.io/badge/Level-Intermediate%20%2F%20Advanced-orange.svg)](#)
+[![Lab](https://img.shields.io/badge/Lab-Deploy%20GitHub%20Pages%20Site-orange.svg)](#4-hands-on-lab)
+[![Requires](https://img.shields.io/badge/Requires-GitHub%20Account-lightgrey.svg)](#-prerequisites)
+[![Free](https://img.shields.io/badge/License-MIT-blue.svg)](../LICENSE)
+[![GitHub Education](https://img.shields.io/badge/GitHub%20Education-Free%20Pro%20Available-blueviolet.svg)](https://education.github.com)
+
+**[← 04 Advanced Git](../04-Advanced-Git/README.md) · [Course Home](../README.md) · [🛠️ Practice Lab →](../Practice-Lab/README.md)**
+
+</div>
+
+---
+
+## 📋 Module Contents
+
+- [Prerequisites](#-prerequisites)
+- [Learning Objectives](#-learning-objectives)
+- [1. Theoretical Explanation](#1-theoretical-explanation)
+  - [GitHub Actions — CI/CD Automation](#github-actions-event-driven-automation)
+  - [GitHub Wikis](#github-wikis-project-documentation)
+  - [GitHub Projects](#github-projects-lightweight-project-management)
+  - [GitHub Pages](#github-pages-free-static-site-hosting)
+  - [GitHub for Education](#github-for-education)
+- [2. Visual Diagram](#2-visual-diagram)
+- [3. The "Cheat Code" Section](#3-the-cheat-code-section)
+- [4. Hands-on Lab](#4-hands-on-lab)
+
+---
+
+## ⚠️ Prerequisites
+
+- Completion of **[Module 03 — Remote Collaboration](../03-Remote-Collaboration/README.md)**
+- A **free GitHub account** — all features in this module are available on the free tier
+- A GitHub repository with at least one commit pushed
+
+> [!TIP]
+> **GitHub Education** offers free Pro accounts for verified students and teachers — unlocking Copilot, advanced CI/CD minutes, and the GitHub Student Developer Pack. Apply at [education.github.com](https://education.github.com) — it's completely free.
+
+---
+
+## 🎯 Learning Objectives
 
 By the end of this module you will be able to:
 
@@ -194,6 +237,16 @@ Congratulations! You've deployed a site and automated your first workflow. This 
 
 ---
 
-**Previous:** [04-Advanced-Git ←](../04-Advanced-Git/README.md)  
-**Practice Lab:** [Practice-Lab →](../Practice-Lab/README.md)  
-**Cheat Sheet:** [Full Command Reference →](../CHEATSHEET.md)
+<div align="center">
+
+| ← Previous | Home | Next → |
+|:---:|:---:|:---:|
+| [04 — Advanced Git](../04-Advanced-Git/README.md) | [📖 Course Home](../README.md) | [🛠️ Practice Lab](../Practice-Lab/README.md) |
+
+**[📋 Full Cheat Sheet](../CHEATSHEET.md) · [🛠️ Practice Lab](../Practice-Lab/README.md) · [📄 License](../LICENSE)**
+
+*You've completed all 6 modules! Time to put it into practice — head to the [Practice Lab](../Practice-Lab/README.md).*
+
+*Part of the free, open-source [Git-Mastery-Hub](../README.md) curriculum — MIT Licensed.*
+
+</div>

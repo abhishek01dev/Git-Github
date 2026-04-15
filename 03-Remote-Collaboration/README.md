@@ -1,6 +1,51 @@
-# Module 03 — Remote Collaboration: Remotes, Push, Pull & Pull Requests
+<div align="center">
 
-## Learning Objectives
+<h1>Module 03 — Remote Collaboration</h1>
+<h3>Remotes, Push, Pull & Pull Requests</h3>
+
+[![Module](https://img.shields.io/badge/Module-03%20of%2005-blue.svg)](../README.md)
+[![Level](https://img.shields.io/badge/Level-Intermediate-yellow.svg)](#)
+[![Commands](https://img.shields.io/badge/Commands-14-purple.svg)](#3-the-cheat-code-section)
+[![Lab](https://img.shields.io/badge/Lab-Connect%20to%20GitHub-orange.svg)](#4-hands-on-lab)
+[![Requires](https://img.shields.io/badge/Requires-GitHub%20Account-lightgrey.svg)](#-prerequisites)
+[![Free](https://img.shields.io/badge/License-MIT-blue.svg)](../LICENSE)
+
+**[← 02 Intermediate Workflows](../02-Intermediate-Workflows/README.md) · [Course Home](../README.md) · [04 Advanced Git →](../04-Advanced-Git/README.md)**
+
+</div>
+
+---
+
+## 📋 Module Contents
+
+- [Prerequisites](#-prerequisites)
+- [Learning Objectives](#-learning-objectives)
+- [1. Theoretical Explanation](#1-theoretical-explanation)
+  - [What Is a Remote?](#what-is-a-remote)
+  - [git fetch vs git pull](#git-fetch-vs-git-pull)
+  - [git pull --rebase vs git pull](#git-pull---rebase-vs-git-pull)
+  - [Tracking Branches](#tracking-branches)
+  - [Force Push Safety](#force-push---force-vs---force-with-lease)
+  - [Pull Requests](#pull-requests)
+- [2. Visual Diagram](#2-visual-diagram)
+- [3. The "Cheat Code" Section](#3-the-cheat-code-section)
+- [4. Hands-on Lab](#4-hands-on-lab)
+
+---
+
+## ⚠️ Prerequisites
+
+This module requires a **free GitHub account**. If you don't have one:
+
+1. Go to [github.com/signup](https://github.com/signup)
+2. Create a free account — no credit card required
+3. Verify your email address
+
+A GitHub account is free and always will be for public and personal use.
+
+---
+
+## 🎯 Learning Objectives
 
 By the end of this module you will be able to:
 
@@ -186,6 +231,14 @@ Your local main now includes the feature you merged via PR.
 
 ---
 
-**Previous:** [02-Intermediate-Workflows ←](../02-Intermediate-Workflows/README.md)  
-**Next:** [04-Advanced-Git →](../04-Advanced-Git/README.md)  
-**Cheat Sheet:** [Full Command Reference →](../CHEATSHEET.md)
+<div align="center">
+
+| ← Previous | Home | Next → |
+|:---:|:---:|:---:|
+| [02 — Intermediate Workflows](../02-Intermediate-Workflows/README.md) | [📖 Course Home](../README.md) | [04 — Advanced Git](../04-Advanced-Git/README.md) |
+
+**[📋 Full Cheat Sheet](../CHEATSHEET.md) · [🛠️ Practice Lab](../Practice-Lab/README.md) · [📄 License](../LICENSE)**
+
+*Part of the free, open-source [Git-Mastery-Hub](../README.md) curriculum — MIT Licensed.*
+
+</div>

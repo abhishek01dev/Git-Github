@@ -1,6 +1,42 @@
-# Module 04 — Advanced Git: Rebase, Cherry-pick, Reflog & History Rewriting
+<div align="center">
 
-## Learning Objectives
+<h1>Module 04 — Advanced Git</h1>
+<h3>Rebase, Cherry-pick, Reflog & History Rewriting</h3>
+
+[![Module](https://img.shields.io/badge/Module-04%20of%2005-blue.svg)](../README.md)
+[![Level](https://img.shields.io/badge/Level-Advanced-red.svg)](#)
+[![Commands](https://img.shields.io/badge/Commands-13-purple.svg)](#3-the-cheat-code-section)
+[![Diagrams](https://img.shields.io/badge/Diagrams-2%20gitGraphs-teal.svg)](#2-visual-diagrams)
+[![Lab](https://img.shields.io/badge/Lab-Interactive%20Rebase-orange.svg)](#4-hands-on-lab)
+[![Free](https://img.shields.io/badge/License-MIT-blue.svg)](../LICENSE)
+
+**[← 03 Remote Collaboration](../03-Remote-Collaboration/README.md) · [Course Home](../README.md) · [05 GitHub Expertise →](../05-GitHub-Expertise/README.md)**
+
+> [!WARNING]
+> This module covers commands that **rewrite commit history**. Understand each command before running it. The lab is designed to be safe — always work on a practice branch, never on `main`.
+
+</div>
+
+---
+
+## 📋 Module Contents
+
+- [Learning Objectives](#-learning-objectives)
+- [1. Theoretical Explanation](#1-theoretical-explanation)
+  - [Rebase: Replaying Commits](#rebase-replaying-commits)
+  - [Interactive Rebase (-i)](#interactive-rebase--i)
+  - [Cherry-Pick: Copying a Commit](#cherry-pick-copying-a-commit)
+  - [Reflog: Git's Undo History](#reflog-gits-undo-history)
+  - [git reset — Three Modes](#git-reset--three-modes)
+  - [git commit --amend](#git-commit---amend)
+  - [git restore](#git-restore-file)
+- [2. Visual Diagrams](#2-visual-diagrams)
+- [3. The "Cheat Code" Section](#3-the-cheat-code-section)
+- [4. Hands-on Lab](#4-hands-on-lab)
+
+---
+
+## 🎯 Learning Objectives
 
 By the end of this module you will be able to:
 
@@ -244,6 +280,14 @@ Your commit is back. You've got this — the reflog is always watching.
 
 ---
 
-**Previous:** [03-Remote-Collaboration ←](../03-Remote-Collaboration/README.md)  
-**Next:** [05-GitHub-Expertise →](../05-GitHub-Expertise/README.md)  
-**Cheat Sheet:** [Full Command Reference →](../CHEATSHEET.md)
+<div align="center">
+
+| ← Previous | Home | Next → |
+|:---:|:---:|:---:|
+| [03 — Remote Collaboration](../03-Remote-Collaboration/README.md) | [📖 Course Home](../README.md) | [05 — GitHub Expertise](../05-GitHub-Expertise/README.md) |
+
+**[📋 Full Cheat Sheet](../CHEATSHEET.md) · [🛠️ Practice Lab](../Practice-Lab/README.md) · [📄 License](../LICENSE)**
+
+*Part of the free, open-source [Git-Mastery-Hub](../README.md) curriculum — MIT Licensed.*
+
+</div>

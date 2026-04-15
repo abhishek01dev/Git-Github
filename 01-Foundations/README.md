@@ -1,6 +1,36 @@
-# Module 01 — Foundations: Init, Add, Commit, Status, Log
+<div align="center">
 
-## Learning Objectives
+<h1>Module 01 — Foundations</h1>
+<h3>Init, Add, Commit, Status & Log</h3>
+
+[![Module](https://img.shields.io/badge/Module-01%20of%2005-blue.svg)](../README.md)
+[![Level](https://img.shields.io/badge/Level-Beginner-brightgreen.svg)](#)
+[![Commands](https://img.shields.io/badge/Commands-16-purple.svg)](#3-the-cheat-code-section)
+[![Lab](https://img.shields.io/badge/Lab-Your%20First%20Repository-orange.svg)](#4-hands-on-lab)
+[![Free](https://img.shields.io/badge/License-MIT-blue.svg)](../LICENSE)
+
+**[← 00 Introduction](../00-Introduction/README.md) · [Course Home](../README.md) · [02 Intermediate →](../02-Intermediate-Workflows/README.md)**
+
+</div>
+
+---
+
+## 📋 Module Contents
+
+- [Learning Objectives](#-learning-objectives)
+- [1. Theoretical Explanation](#1-theoretical-explanation)
+  - [git init & .git/ Directory](#git-init-and-the-git-directory)
+  - [The Staging Area (Index)](#the-staging-area-index)
+  - [Atomic Commits](#atomic-commits)
+  - [Commit SHAs](#commit-shas)
+  - [git status Output](#git-status-output)
+- [2. Visual Diagram](#2-visual-diagram)
+- [3. The "Cheat Code" Section](#3-the-cheat-code-section)
+- [4. Hands-on Lab](#4-hands-on-lab)
+
+---
+
+## 🎯 Learning Objectives
 
 By the end of this module you will be able to:
 
@@ -196,6 +226,14 @@ You now have two commits. Congratulations — you understand the core Git workfl
 
 ---
 
-**Previous:** [00-Introduction ←](../00-Introduction/README.md)  
-**Next:** [02-Intermediate-Workflows →](../02-Intermediate-Workflows/README.md)  
-**Cheat Sheet:** [Full Command Reference →](../CHEATSHEET.md)
+<div align="center">
+
+| ← Previous | Home | Next → |
+|:---:|:---:|:---:|
+| [00 — Introduction](../00-Introduction/README.md) | [📖 Course Home](../README.md) | [02 — Intermediate Workflows](../02-Intermediate-Workflows/README.md) |
+
+**[📋 Full Cheat Sheet](../CHEATSHEET.md) · [🛠️ Practice Lab](../Practice-Lab/README.md) · [📄 License](../LICENSE)**
+
+*Part of the free, open-source [Git-Mastery-Hub](../README.md) curriculum — MIT Licensed.*
+
+</div>
