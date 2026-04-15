@@ -56,6 +56,203 @@ By the end of this module you will be able to:
 
 ## 1. Theoretical Explanation
 
+### `git tag` — Marking Important Points in History
+
+A **tag** is a permanent label for a specific commit. Unlike a branch (which moves forward with every new commit), a tag stays frozen at one commit forever.
+
+Tags are used to mark **releases** — `v1.0`, `v2.3.1`, `v3.0.0-beta`. When you download software and see "version 2.1.0", there is a Git tag named `v2.1.0` pointing to exactly that commit.
+
+**Two types of tags:**
+
+```bash
+# Lightweight tag — just a pointer, no extra info
+git tag v1.0
+
+# Annotated tag — recommended for releases (has message, author, date)
+git tag -a v1.0 -m "Release version 1.0 — first stable release"
+```
+
+**Common tag commands:**
+```bash
+git tag                         # List all tags
+git tag -a v1.0 -m "message"    # Create annotated tag on current commit
+git tag v1.0 3e887ab             # Tag a specific past commit
+git show v1.0                    # See what commit a tag points to
+git push origin v1.0             # Push ONE tag to remote
+git push origin --tags           # Push ALL tags to remote
+git tag -d v1.0                  # Delete a tag locally
+git push origin --delete v1.0   # Delete a tag on remote
+```
+
+> [!NOTE]
+> `git push` does NOT push tags automatically. You must explicitly push tags with `git push --tags` or `git push origin v1.0`. This surprises many developers the first time they release.
+
+**Semantic Versioning (SemVer)** — how version numbers work:
+```
+v  MAJOR . MINOR . PATCH
+v    2   .   3   .   1
+
+MAJOR = breaking change (existing code may stop working)
+MINOR = new features added, backwards compatible
+PATCH = bug fix, no new features
+```
+
+---
+
+### `.gitignore` — Telling Git What to Ignore
+
+A `.gitignore` file tells Git to completely ignore certain files and folders. Ignored files never appear in `git status`, never get staged, and never get committed.
+
+**Create a `.gitignore`:**
+```bash
+touch .gitignore       # Create it
+code .gitignore        # Open in VS Code (or any editor)
+```
+
+**The pattern syntax — plain English:**
+
+```gitignore
+# Lines starting with # are comments
+
+# Ignore a specific file by name
+secrets.env
+passwords.txt
+
+# Ignore all files with a specific extension
+*.log           # Any file ending in .log
+*.tmp           # Any file ending in .tmp
+*.pyc           # Python compiled files
+
+# Ignore a specific folder (the trailing / means it's a folder)
+node_modules/
+__pycache__/
+.venv/
+dist/
+build/
+
+# Ignore all files inside a folder
+logs/
+coverage/
+
+# Wildcard: match any single character
+file?.txt       # Matches file1.txt, fileA.txt, but NOT file10.txt
+
+# Double star: match any number of nested folders
+**/temp         # Matches temp/ anywhere in the project
+src/**/*.test.js  # Match all .test.js files anywhere under src/
+
+# Negate a pattern (include something that would otherwise be ignored)
+!important.log  # Do NOT ignore this specific file, even though *.log is ignored
+```
+
+**A typical `.gitignore` for a web project:**
+```gitignore
+# Dependencies
+node_modules/
+
+# Environment variables (NEVER commit these)
+.env
+.env.local
+.env.production
+
+# Build output
+dist/
+build/
+*.min.js
+*.min.css
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store        # macOS
+Thumbs.db        # Windows
+desktop.ini      # Windows
+
+# Logs
+*.log
+npm-debug.log*
+```
+
+> [!WARNING]
+> `.gitignore` only works for files Git has **never tracked before**. If you already committed `secrets.env`, adding it to `.gitignore` won't help — Git still tracks it. You must run `git rm --cached secrets.env` to stop tracking it, then commit that change.
+
+---
+
+### `git bisect` — Finding the Commit That Broke Everything
+
+`git bisect` is a debugging superpower. You know the code worked in the past and it's broken now. You don't know which commit broke it. `git bisect` does a **binary search** through your commit history to find the exact bad commit — automatically.
+
+**How it works:**
+1. You tell Git a "good" commit (code worked here) and a "bad" commit (code is broken here)
+2. Git checks out the commit exactly halfway between them
+3. You test if the code works at that point
+4. You tell Git "good" or "bad"
+5. Git checks out the next midpoint
+6. Repeat until Git identifies the exact breaking commit
+
+```bash
+# Start bisect
+git bisect start
+
+# Tell Git the current commit is bad (broken)
+git bisect bad
+
+# Tell Git a commit from 2 weeks ago was good (working)
+git bisect good v1.0
+# or: git bisect good 3e887ab
+
+# Git checks out the midpoint commit automatically
+# --- TEST YOUR CODE HERE ---
+# Does it work? Then:
+git bisect good
+# Does it NOT work? Then:
+git bisect bad
+
+# Keep testing midpoints...
+# Eventually Git says:
+# "abc1234 is the first bad commit"
+
+# Stop bisect (returns you to original branch)
+git bisect reset
+```
+
+**Why binary search?** If you have 1000 commits between "good" and "bad", checking each one takes 1000 tries. Binary search takes only **10 tries** (because `log₂(1000) ≈ 10`). Each answer cuts the search space in half.
+
+---
+
+### `git blame` — Who Wrote That Line?
+
+`git blame` shows you, for every single line of a file, who wrote it and in which commit.
+
+```bash
+git blame README.md
+```
+
+Output:
+```
+3e887ab (Abhishek    2026-04-15 10:00:00 +0530  1) # GIT&GITHUB
+a1b2c3d (Jane Smith  2026-04-10 09:30:00 +0530  2) 
+a1b2c3d (Jane Smith  2026-04-10 09:30:00 +0530  3) Beginner to Advanced
+f4e5d6c (Abhishek    2026-04-12 14:15:00 +0530  4) Your complete learning path
+```
+
+Each line shows: `SHA  (Author  Date  LineNumber) Content`
+
+**Useful options:**
+```bash
+git blame -L 10,20 README.md    # Show blame for only lines 10 to 20
+git blame --since=2.weeks README.md  # Only show recent changes
+git log -p --follow README.md    # Full history of changes to a file (better for understanding)
+```
+
+> [!TIP]
+> `git blame` is not for blame — it's for context. When you see a confusing line of code, `git blame` tells you the commit SHA. Then `git show <sha>` shows you the full commit message and context for WHY that line was written. This is one of the most valuable debugging tools you have.
+
+---
+
 ### GitHub Actions: Event-Driven Automation
 
 **GitHub Actions** is a CI/CD (Continuous Integration / Continuous Deployment) platform built directly into GitHub. You define automation workflows as YAML files stored in `.github/workflows/`.

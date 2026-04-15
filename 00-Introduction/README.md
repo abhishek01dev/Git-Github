@@ -79,6 +79,61 @@ Git was designed with these goals:
 - Fully distributed
 - Able to handle large projects like the Linux kernel efficiently
 
+### Git vs GitHub — What Is the Difference?
+
+This confuses almost every beginner. They sound the same but they are completely different things.
+
+**Git** is a tool. It runs on your computer. It tracks changes to files. It has nothing to do with the internet. You can use Git with zero internet connection, on a machine that has never been online. Git is free, open-source software you install locally.
+
+**GitHub** is a website. It is a hosting service that stores copies of your Git repositories online. It adds features on top of Git — Pull Requests, Issues, Actions, Pages, team management. GitHub is owned by Microsoft. There are alternatives: GitLab, Bitbucket, Gitea.
+
+Think of it this way:
+- **Git** = Microsoft Word (the software on your computer)
+- **GitHub** = Google Drive (a website that stores and shares your Word documents)
+
+You write documents in Word. You upload them to Google Drive so others can see them. You could use Word without Google Drive. You could use Google Drive with other editors.
+
+Same with Git and GitHub:
+- You make commits with **Git** (locally, on your computer)
+- You upload those commits to **GitHub** (so others can see them, or so you have a backup)
+
+| | Git | GitHub |
+|---|---|---|
+| What it is | Software (CLI tool) | Website / cloud service |
+| Who made it | Linus Torvalds | GitHub Inc. (now Microsoft) |
+| Where it runs | Your local computer | github.com servers |
+| Needs internet? | No | Yes |
+| Cost | Free forever | Free for public repos; paid for some private features |
+| Alternatives | Mercurial, SVN | GitLab, Bitbucket, Gitea |
+
+---
+
+### What Is a Repository?
+
+A **repository** (or "repo") is just a folder that Git is tracking.
+
+That's it. It's a normal folder on your computer, but with a hidden `.git/` subfolder inside it. That `.git/` folder is where Git stores all the history, branches, and configuration.
+
+```
+my-project/          ← This is your repository (the whole folder)
+├── .git/            ← This is where Git stores ALL the history
+├── README.md        ← Your normal files
+├── index.html       ← Your normal files
+└── style.css        ← Your normal files
+```
+
+When someone says "clone the repo", they mean: download this folder (and its entire `.git/` history) to your computer.
+
+When someone says "push to the repo", they mean: upload your new commits from your local `.git/` to the server's `.git/`.
+
+There are two kinds of repositories:
+- **Local repository** — lives on your computer (the `my-project/` folder above)
+- **Remote repository** — lives on a server like GitHub (accessible via a URL)
+
+They are copies of each other. You sync them with `git push` and `git pull`.
+
+---
+
 ### Git's Three States
 
 Every file in a Git repository lives in one of three states. Understanding this is the single most important mental model in Git.

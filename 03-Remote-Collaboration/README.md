@@ -70,6 +70,117 @@ git remote add origin https://github.com/username/my-repo.git
 
 After this command, `origin` is just an alias for that URL. Every time you push or fetch, Git knows where to talk to.
 
+### `git push` — What Exactly Happens?
+
+When you run `git push origin main`, here is the exact sequence of events:
+
+1. Git reads your local `main` branch and finds all commits that the remote doesn't have yet
+2. Git packages those commits and uploads them to the GitHub server over HTTPS or SSH
+3. GitHub adds those commits to its copy of the repository
+4. GitHub updates its `main` branch pointer to match yours
+5. Git updates your **remote tracking ref** `origin/main` to match
+
+```bash
+git push origin main
+# Read as: "Push my local 'main' branch to the remote named 'origin'"
+```
+
+**First push of a new branch:**
+```bash
+git push -u origin feature/login
+# -u sets up "tracking" — links your local branch to the remote one
+# After this, you can just type: git push (no need to specify origin/branch again)
+```
+
+**What `origin/main` is:** It's a read-only snapshot of what `main` looked like on the remote the last time you fetched or pushed. It lives in your local `.git/refs/remotes/origin/main`. It's not the same as your local `main`.
+
+---
+
+### HTTPS vs SSH — Two Ways to Authenticate With GitHub
+
+When you clone or push to GitHub, you need to prove who you are. GitHub supports two methods:
+
+**HTTPS (the default, easiest to set up):**
+```bash
+git clone https://github.com/abhishek01dev/Git-Github.git
+```
+- Uses a URL starting with `https://`
+- Git will ask for your GitHub username and password (or Personal Access Token)
+- Personal Access Tokens (PAT) are required since 2021 — plain passwords no longer work
+- Generate a PAT at: GitHub → Settings → Developer Settings → Personal access tokens
+
+**SSH (more secure, more convenient once set up):**
+```bash
+git clone git@github.com:abhishek01dev/Git-Github.git
+```
+- Uses a URL starting with `git@github.com:`
+- Uses an SSH key pair — no password prompts once configured
+- Setup steps:
+  ```bash
+  # 1. Generate an SSH key (only once ever)
+  ssh-keygen -t ed25519 -C "your@email.com"
+
+  # 2. Copy your public key
+  cat ~/.ssh/id_ed25519.pub   # Copy this entire output
+
+  # 3. Add it to GitHub
+  # GitHub → Settings → SSH and GPG keys → New SSH key → Paste
+  
+  # 4. Test the connection
+  ssh -T git@github.com
+  # Hi abhishek01dev! You've successfully authenticated.
+  ```
+
+| | HTTPS | SSH |
+|---|---|---|
+| Setup effort | Minimal | One-time key generation |
+| Daily use | Token prompt (unless cached) | Silent, no prompts |
+| Behind firewalls | Works everywhere | Port 22 sometimes blocked |
+| Best for | Beginners, quick setup | Daily use on your own machine |
+
+**Switch an existing repo from HTTPS to SSH:**
+```bash
+git remote set-url origin git@github.com:abhishek01dev/Git-Github.git
+```
+
+---
+
+### Managing Your Remotes
+
+You can have more than one remote. This is common when you fork a repo — you have `origin` (your fork) and `upstream` (the original).
+
+```bash
+# See all remotes
+git remote -v
+
+# Add a remote
+git remote add upstream https://github.com/original-author/repo.git
+
+# Rename a remote
+git remote rename origin old-origin
+
+# Change a remote's URL
+git remote set-url origin https://github.com/abhishek01dev/Git-Github.git
+
+# Remove a remote (only removes the reference, doesn't delete anything)
+git remote remove upstream
+
+# Get detailed info about a remote
+git remote show origin
+```
+
+**Common two-remote setup (fork workflow):**
+```bash
+# origin  = YOUR fork (you push to this)
+# upstream = original repo (you fetch updates from this)
+
+git fetch upstream        # Get the latest from original
+git merge upstream/main   # Merge it into your local main
+git push origin main      # Push the updated main to YOUR fork
+```
+
+---
+
 ### `git fetch` vs. `git pull`
 
 This distinction is one of the most important concepts in collaborative Git:
@@ -78,6 +189,24 @@ This distinction is one of the most important concepts in collaborative Git:
 |---|---|---|
 | `git fetch` | Downloads commits and branches from remote — **does not modify your working directory or local branches** | Always safe |
 | `git pull` | Runs `git fetch` followed immediately by `git merge` (or `git rebase` with `--rebase`) | Merges automatically |
+
+**A plain-English analogy:**
+
+Imagine your team uses a shared Google Doc, but you work on a local printed copy.
+
+- `git fetch` = going to the office and **photocopying** the latest Google Doc. Your printed copy is unchanged. You can compare before deciding what to do.
+- `git pull` = going to the office, photocopying it, and immediately **scribbling those changes onto your printed copy**. Faster, but you have less control.
+
+```bash
+# git fetch — safe inspection first
+git fetch origin
+git log HEAD..origin/main --oneline   # See what they have that you don't
+git diff HEAD origin/main             # See the actual changes
+git merge origin/main                 # NOW decide to merge
+
+# git pull — fetch + merge in one step
+git pull origin main
+```
 
 **Best practice:** Use `git fetch` first to see what changed, then decide whether to merge. Use `git pull` when you trust the remote and want a quick sync.
 

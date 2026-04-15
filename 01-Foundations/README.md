@@ -91,6 +91,206 @@ Every commit is identified by a **SHA-1 hash** — a 40-character hexadecimal st
 
 In practice, you only need the first 7 characters (e.g., `3e887ab`) — Git can find the full commit from a unique short prefix.
 
+### `git add` — What Exactly Happens?
+
+When you run `git add somefile.txt`, Git does one thing: it **copies the current version of that file into the staging area**.
+
+Nothing is saved permanently yet. Nothing is sent anywhere. Git just says "okay, I'll include this exact version of this file in the next snapshot."
+
+```bash
+echo "Hello" > message.txt     # File exists on disk
+git add message.txt             # Git copies it into the staging area
+echo "World" >> message.txt     # You modify it AFTER staging
+git commit -m "add message"     # Git commits the STAGED version ("Hello"), NOT the new one
+```
+
+This is why you can stage a file, modify it, and have two different versions — the staged one and the working directory one. `git add` captures a moment in time.
+
+**The three forms you'll use every day:**
+
+```bash
+git add filename.txt       # Stage one specific file
+git add folder/            # Stage everything inside a folder
+git add .                  # Stage ALL changes in the current directory and below
+git add *.js               # Stage all .js files (glob pattern)
+git add -p                 # Stage specific lines/hunks interactively (most powerful)
+```
+
+> [!TIP]
+> `git add .` is convenient but can include files you didn't mean to stage. Always run `git status` after `git add .` to verify what you actually staged.
+
+---
+
+### `git commit` — What Exactly Happens?
+
+When you run `git commit`, Git permanently saves a **snapshot** of everything in the staging area. It also saves:
+- Your name and email (from `git config`)
+- The exact date and time
+- The commit message you wrote
+- A pointer to the previous commit (the "parent")
+
+That bundle of information is hashed into a SHA-1 fingerprint like `3e887ab`. That hash IS the commit. It's permanent and unique.
+
+```bash
+git commit -m "feat: add login button"
+```
+
+What Git does internally:
+1. Reads everything in the staging area
+2. Packages it into a snapshot (called a "tree object")
+3. Creates a commit object with your message, author, timestamp, and parent SHA
+4. Computes the SHA hash of all that
+5. Writes it to `.git/objects/`
+6. Moves the branch pointer (e.g., `main`) to point at this new commit
+
+After a commit, **the staging area is empty** again. You start fresh.
+
+**The forms you'll use:**
+```bash
+git commit                      # Opens your editor to write a long message
+git commit -m "short message"   # Inline message — fastest
+git commit -am "message"        # Stage ALL tracked (already committed before) files AND commit
+                                # WARNING: -am skips unstaged new (untracked) files
+git commit --amend              # Fix the last commit (message or missing files)
+```
+
+> [!NOTE]
+> `git commit -am` only stages files that Git **already knows about** (tracked files). If you created a brand new file, `-am` won't include it. You must `git add` new files explicitly first.
+
+---
+
+### Reading `git diff` Output
+
+`git diff` shows you exactly what changed, line by line. The output looks intimidating at first but follows a simple pattern.
+
+```
+diff --git a/README.md b/README.md
+index 3b18e51..f9264ec 100644
+--- a/README.md
++++ b/README.md
+@@ -1,3 +1,4 @@
+ # My Project
+-Old description here
++New description here
++A second new line
+ Some unchanged line
+```
+
+**Reading it line by line:**
+
+| Line | Meaning |
+|---|---|
+| `--- a/README.md` | The "before" version of the file |
+| `+++ b/README.md` | The "after" version of the file |
+| `@@ -1,3 +1,4 @@` | Context: was 3 lines starting at line 1, now 4 lines starting at line 1 |
+| Lines starting with `-` (red) | Lines that were **removed** |
+| Lines starting with `+` (green) | Lines that were **added** |
+| Lines with no prefix (white) | **Unchanged** context lines shown for reference |
+
+**Three versions of diff you need:**
+```bash
+git diff              # Unstaged changes (what you've edited but NOT yet git add-ed)
+git diff --staged     # Staged changes (what you have git add-ed but NOT yet committed)
+git diff HEAD         # ALL changes since last commit (staged + unstaged combined)
+```
+
+A simple mental model:
+- `git diff` → "what have I changed that I haven't staged yet?"
+- `git diff --staged` → "what am I about to commit?"
+- `git diff HEAD` → "how different is my working directory from the last commit?"
+
+---
+
+### Reading `git log` Output
+
+When you run `git log`, you'll see something like this:
+
+```
+commit 3e887ab2f1c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7
+Author: Abhishek <abhishek@example.com>
+Date:   Wed Apr 16 10:23:01 2026 +0530
+
+    feat: add user login page
+
+    Added HTML form and basic CSS.
+    Resolves issue #42.
+
+commit 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b
+Author: Abhishek <abhishek@example.com>
+Date:   Tue Apr 15 09:00:00 2026 +0530
+
+    init: project setup
+```
+
+**What each part means:**
+
+| Part | Meaning |
+|---|---|
+| `commit 3e887ab...` | The full SHA (unique ID) of this commit |
+| `Author:` | Who made it — from your `git config user.name` and `user.email` |
+| `Date:` | When it was committed |
+| The indented text | The commit message — first line is the summary, blank line, then body |
+
+**Useful log variations:**
+```bash
+git log --oneline           # One line per commit: "3e887ab feat: add login page"
+git log --oneline --graph   # ASCII art showing branches and merges
+git log -5                  # Show only last 5 commits
+git log --author="Abhishek" # Show only commits by this person
+git log --since="2 weeks ago"  # Commits from the last 2 weeks
+git log README.md           # Show only commits that touched README.md
+git log --stat              # Show which files changed in each commit
+git show 3e887ab            # Show full details of one specific commit
+```
+
+---
+
+### Removing and Renaming Files Properly
+
+**`git rm` — Delete a file and tell Git about it**
+
+If you delete a file with `rm` (or just delete it in your file explorer), Git sees it as a change but doesn't stage the deletion automatically. You'd have to `git add` the deletion. `git rm` does both at once.
+
+```bash
+# The wrong way (two steps):
+rm old-file.txt
+git add old-file.txt   # Stage the deletion
+
+# The right way (one step):
+git rm old-file.txt    # Deletes the file AND stages the deletion
+git commit -m "remove: delete old-file.txt"
+```
+
+**`git rm --cached` — Stop tracking a file but keep it on disk**
+
+This is useful when you accidentally committed a file (like `.env`) that you want Git to forget about without actually deleting it.
+
+```bash
+git rm --cached secrets.env    # Git forgets this file, but it stays on your disk
+echo "secrets.env" >> .gitignore  # Now add it to .gitignore so it stays ignored
+git commit -m "fix: remove secrets.env from tracking"
+```
+
+**`git mv` — Rename or move a file and tell Git about it**
+
+If you rename a file with `mv` (or in your file explorer), Git sees it as a deleted file + a new untracked file. `git mv` renames it and stages the rename as one operation.
+
+```bash
+# The wrong way:
+mv old-name.txt new-name.txt
+git add new-name.txt
+git rm old-name.txt
+
+# The right way (one step):
+git mv old-name.txt new-name.txt
+git commit -m "refactor: rename old-name to new-name"
+```
+
+> [!NOTE]
+> Git actually doesn't store renames explicitly — it detects them by comparing file content. But using `git mv` keeps your staging area clean and your intent clear.
+
+---
+
 ### `git status` Output
 
 `git status` shows three categories:

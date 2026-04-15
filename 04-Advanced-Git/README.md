@@ -92,16 +92,125 @@ This is your ultimate safety net. Even if you do `git reset --hard` and "lose" c
 > [!NOTE]
 > `git reflog` is your safety net. Even after `git reset --hard`, commits are recoverable for ~30 days via the reflog. Run `git reflog BRANCHNAME` to find the SHA of the commit you want to recover, then `git reset --hard <SHA>` to restore it.
 
-### `git reset` — Three Modes
+### `git reset` — Three Modes Explained in Plain English
 
-| Command | Moves HEAD? | Clears Staging Area? | Clears Working Directory? | Use For |
-|---|---|---|---|---|
-| `git reset HEAD^` (mixed, default) | Yes | Yes | No | Undo last commit, keep changes staged/unstaged |
-| `git reset --soft HEAD^` | Yes | No | No | Undo last commit, keep changes staged |
-| `git reset --hard <commit>` | Yes | Yes | **Yes** | Nuclear reset — all changes gone |
+`git reset` moves the branch pointer (and HEAD) backwards to a previous commit. The three modes control what happens to the changes that were in those commits after you "undo" them.
+
+**Think of it like this:** You wrote 3 paragraphs in a document and saved (committed) each one. `git reset` lets you "un-save" the last paragraph. The three modes decide: does the un-saved text go back to your draft (working directory), your clipboard (staging), or get deleted entirely?
+
+---
+
+**`--soft` — undo the commit, keep everything staged**
+
+```bash
+git reset --soft HEAD^
+```
+
+What it does:
+- Moves `main` (and HEAD) back one commit
+- The changes from that commit go back into the **staging area**, ready to commit again
+- Your files on disk are unchanged
+
+Use it when: you committed too early and want to rewrite the commit message, or combine it with the previous commit.
+
+```bash
+# Example: you committed with a bad message
+git log --oneline
+# abc1234 bad msg
+# def5678 previous good commit
+
+git reset --soft HEAD^
+# Now abc1234's changes are staged, ready to re-commit
+git commit -m "feat: proper message this time"
+```
+
+---
+
+**`--mixed` (the default) — undo the commit, keep changes but unstage them**
+
+```bash
+git reset HEAD^          # --mixed is the default
+git reset --mixed HEAD^  # same thing
+```
+
+What it does:
+- Moves `main` (and HEAD) back one commit
+- The changes from that commit go back to the **working directory** as unstaged changes
+- Your files on disk are unchanged
+
+Use it when: you want to un-commit and re-think what to stage and commit.
+
+---
+
+**`--hard` — undo the commit AND delete all the changes**
+
+```bash
+git reset --hard HEAD^
+git reset --hard <commit-sha>
+```
+
+What it does:
+- Moves `main` (and HEAD) back to the specified commit
+- **Deletes all changes** in the staging area AND working directory
+- Your files on disk are overwritten to match the target commit
+
+Use it when: you want to completely throw away recent work and get back to a clean state.
 
 > [!WARNING]
-> `git reset --hard` is destructive — it permanently discards all uncommitted changes in both the staging area and the working directory. Use with extreme caution.
+> `git reset --hard` is destructive — it permanently discards all uncommitted changes. There is no undo for working directory changes. Only use it when you are absolutely certain you want to discard everything.
+
+**Side-by-side comparison:**
+
+| Mode | Moves HEAD | Clears Staging | Clears Working Dir | Best For |
+|---|:---:|:---:|:---:|---|
+| `--soft` | ✅ | ❌ | ❌ | Re-commit with a better message |
+| `--mixed` (default) | ✅ | ✅ | ❌ | Undo a commit and re-stage selectively |
+| `--hard` | ✅ | ✅ | ✅ | Throw everything away and start clean |
+
+---
+
+### `git checkout` vs `git restore` vs `git reset` — The Confusion Solved
+
+These three commands all "undo" things but at different levels. This is the most confusing area for beginners.
+
+```
+git checkout <file>          → discard changes in working directory (old)
+git restore <file>           → discard changes in working directory (new, clearer)
+git restore --staged <file>  → unstage a file (move out of staging area)
+git reset <file>             → unstage a file (same as restore --staged)
+git reset --hard             → discard all staged + unstaged changes
+git reset HEAD^              → undo the last commit (keep changes)
+git revert <commit>          → create a new commit that undoes a previous commit (safe for shared history)
+```
+
+**The simplest mental model:**
+
+| Situation | Command to use |
+|---|---|
+| "I changed a file and want the original back" | `git restore <file>` |
+| "I staged a file by mistake and want to unstage it" | `git restore --staged <file>` |
+| "I committed by mistake and want to un-commit (keep changes)" | `git reset HEAD^` |
+| "I want to completely throw away my last N commits" | `git reset --hard HEAD~N` |
+| "I committed to a shared branch and need to undo it safely" | `git revert <commit>` |
+
+> [!NOTE]
+> **`git revert`** creates a *new* commit that reverses the changes of a previous commit. It doesn't rewrite history — it adds to it. This makes it safe to use on shared/public branches where `git reset` (which rewrites history) would cause problems for everyone else.
+
+---
+
+### `git clean` — Deleting Untracked Files
+
+`git clean` removes files from your working directory that Git doesn't know about (untracked files). It does NOT touch tracked files (files that Git has already committed at least once).
+
+```bash
+git clean -n          # Dry run — show what WOULD be deleted without actually deleting
+git clean -f          # Actually delete untracked files (files only, not folders)
+git clean -fd         # Delete untracked files AND untracked folders
+git clean -fx         # Delete untracked files AND files ignored by .gitignore
+```
+
+> [!WARNING]
+> Always run `git clean -n` (dry run) first to see what would be deleted. `git clean -f` is not reversible — there is no reflog for untracked files. They are gone permanently.
 
 ### `git commit --amend`
 

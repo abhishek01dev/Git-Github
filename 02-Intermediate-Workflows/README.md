@@ -54,9 +54,62 @@ This is why branches in Git are so cheap to create and delete — there's no cop
 
 ### HEAD: Where You Are Right Now
 
-**HEAD** is a special pointer that tells Git "this is where you are right now." It almost always points to the tip of your current branch. When you make a new commit, HEAD (and the current branch pointer) moves forward to the new commit automatically.
+**HEAD** is a special pointer that tells Git "this is where you are right now."
 
-When HEAD points directly to a commit SHA instead of a branch name, you're in **detached HEAD state** — this is expected when checking out old commits for inspection.
+Think of HEAD like a bookmark in a book. The book is your commit history. HEAD is the page you're currently on.
+
+In normal use, HEAD points to your current **branch name** (not directly to a commit). That branch name then points to the latest commit. So the chain looks like this:
+
+```
+HEAD → main → commit 3e887ab (latest commit)
+```
+
+When you make a new commit, Git:
+1. Creates the new commit
+2. Moves the `main` pointer to the new commit
+3. HEAD still points to `main` — so HEAD moved too, automatically
+
+```
+HEAD → main → NEW commit 9f1a2b3
+                  ↑
+              (was at 3e887ab before)
+```
+
+**Detached HEAD state** happens when HEAD points directly to a commit SHA instead of a branch name:
+
+```
+HEAD → 3e887ab  (directly to a commit, no branch)
+```
+
+This happens when you run `git checkout <commit-sha>` or `git checkout <tag>`. You can look around, run the old code, inspect files — but if you make commits, they won't belong to any branch. If you then switch branches, those commits become unreachable (though reflog can recover them).
+
+```bash
+# Enter detached HEAD (to inspect an old commit)
+git checkout 3e887ab
+# Warning: You are in 'detached HEAD' state.
+
+# Get back to normal (re-attach HEAD to a branch)
+git switch main
+# or: git checkout main
+```
+
+> [!NOTE]
+> Detached HEAD is not an error. It's a way to safely inspect old code. Just don't make commits in this state unless you immediately create a new branch to hold them: `git switch -c my-new-branch`
+
+---
+
+### `git switch` vs `git checkout` — Why Two Commands?
+
+`git checkout` was Git's original command for switching branches. Over time, it got overloaded with too many jobs. In Git 2.23 (2019), Git split it into two focused commands:
+
+| Old command | New command | Job |
+|---|---|---|
+| `git checkout <branch>` | `git switch <branch>` | Switch to a branch |
+| `git checkout -b <branch>` | `git switch -c <branch>` | Create and switch to a branch |
+| `git checkout <file>` | `git restore <file>` | Discard changes to a file |
+| `git checkout <commit>` | *(still use checkout)* | Inspect an old commit |
+
+**Both `git checkout` and `git switch` still work.** You will see both in tutorials, documentation, and codebases. Know both. Prefer `git switch` for branch operations in new work — it's clearer and harder to misuse.
 
 ### `git switch` (Modern) vs. `git checkout` (Legacy)
 
