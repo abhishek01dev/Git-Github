@@ -1,6 +1,36 @@
-# Module 00 — Introduction: Why Git? Setup & Configuration
+<div align="center">
 
-## Learning Objectives
+<h1>Module 00 — Introduction</h1>
+<h3>Why Git? Version Control, Setup & Configuration</h3>
+
+[![Module](https://img.shields.io/badge/Module-00%20of%2005-blue.svg)](../README.md)
+[![Level](https://img.shields.io/badge/Level-Absolute%20Beginner-brightgreen.svg)](#)
+[![Commands](https://img.shields.io/badge/Commands-8-purple.svg)](#3-the-cheat-code-section)
+[![Lab](https://img.shields.io/badge/Lab-Your%20First%20Git%20Identity%20Setup-orange.svg)](#4-hands-on-lab)
+[![Free](https://img.shields.io/badge/License-MIT-blue.svg)](../LICENSE)
+
+**[← Course Home](../README.md) · [Next: Foundations →](../01-Foundations/README.md) · [📋 Full Cheat Sheet](../CHEATSHEET.md)**
+
+</div>
+
+---
+
+## 📋 Module Contents
+
+- [Learning Objectives](#-learning-objectives)
+- [1. Theoretical Explanation](#1-theoretical-explanation)
+  - [What Is a VCS?](#what-is-a-version-control-system)
+  - [Distributed vs. Centralized VCS](#distributed-vs-centralized-vcs)
+  - [A Brief History of Git](#a-brief-history-of-git)
+  - [Git's Three States](#gits-three-states)
+  - [Installing Git](#installing-git)
+- [2. Visual Diagram](#2-visual-diagram)
+- [3. The "Cheat Code" Section](#3-the-cheat-code-section)
+- [4. Hands-on Lab](#4-hands-on-lab)
+
+---
+
+## 🎯 Learning Objectives
 
 By the end of this module you will be able to:
 
@@ -11,6 +41,8 @@ By the end of this module you will be able to:
 ---
 
 ## 1. Theoretical Explanation
+
+> **Estimated read time:** 10 minutes · **Lab time:** 10 minutes
 
 ### What Is a Version Control System?
 
@@ -195,5 +227,16 @@ You will see: `fatal: not a git repository`. **This is correct at this stage!** 
 
 ---
 
-**Next:** [01-Foundations →](../01-Foundations/README.md)  
-**Cheat Sheet:** [Full Command Reference →](../CHEATSHEET.md)
+---
+
+<div align="center">
+
+| ← Previous | Home | Next → |
+|:---:|:---:|:---:|
+| *(Start of course)* | [📖 Course Home](../README.md) | [01 — Foundations](../01-Foundations/README.md) |
+
+**[📋 Full Cheat Sheet](../CHEATSHEET.md) · [🛠️ Practice Lab](../Practice-Lab/README.md) · [📄 License](../LICENSE)**
+
+*Part of the free, open-source [Git-Mastery-Hub](../README.md) curriculum — MIT Licensed.*
+
+</div>
