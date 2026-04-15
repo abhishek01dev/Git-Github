@@ -33,6 +33,7 @@
 - [Repository Structure](#-repository-structure)
 - [Table of Contents — Modules](#-table-of-contents--modules)
 - [Quick Start](#-quick-start)
+- [How to Fork & Use This Repository](#-how-to-fork--use-this-repository)
 - [Who Is This For?](#-who-is-this-for)
 - [The 30-Day Practice System](#-the-30-day-practice-system)
 - [Command Coverage](#-command-coverage)
@@ -75,22 +76,46 @@ Most Git resources are either too shallow (a 5-minute overview) or too dense (th
 
 After completing this course you will be able to:
 
-- ✅ Install and configure Git on any operating system
+**Foundations**
+- ✅ Explain the difference between Git and GitHub
+- ✅ Install and configure Git on Windows, macOS, and Linux
 - ✅ Understand Git's three states: **Working Directory → Staging Area → Repository**
-- ✅ Create repositories, stage changes, and write meaningful commits
-- ✅ Read commit history using `git log`, `git log --oneline`, `git log --graph`
+- ✅ Use `git add`, `git commit`, `git status`, `git diff` — and know exactly what each does internally
+- ✅ Read `git diff` output (understand `+`, `-`, `@@` lines)
+- ✅ Read `git log` output and use 8+ useful log variants
+- ✅ Remove and rename files properly with `git rm` and `git mv`
+
+**Branching & Merging**
 - ✅ Create, switch, merge, and delete branches with confidence
+- ✅ Explain HEAD, detached HEAD state, and how to recover
+- ✅ Know when `git switch` vs `git checkout` is appropriate (and why two commands exist)
 - ✅ Explain the difference between fast-forward, 3-way, and squash merges
-- ✅ Resolve merge conflicts
-- ✅ Use `git stash` to manage work-in-progress
-- ✅ Connect local repositories to GitHub remotes
-- ✅ Push, fetch, and pull changes — and understand the difference
-- ✅ Create and merge Pull Requests
+- ✅ Resolve merge conflicts from start to finish
+- ✅ Use `git stash` to save work-in-progress and manage a stash stack
+
+**Remote Collaboration**
+- ✅ Connect local repos to GitHub using HTTPS or SSH
+- ✅ Explain what `git push` actually does step-by-step
+- ✅ Know the difference between `git fetch` and `git pull` (with real analogies)
+- ✅ Set up and manage multiple remotes (`origin`, `upstream`, fork workflow)
+- ✅ Create, review, and merge Pull Requests
+- ✅ Recover from a rejected push without using `--force`
+
+**Advanced Git**
 - ✅ Rebase branches for a clean linear history
-- ✅ Use interactive rebase to squash, reorder, and drop commits
+- ✅ Use interactive rebase (`git rebase -i`) to squash, reorder, and drop commits
 - ✅ Cherry-pick individual commits across branches
 - ✅ Recover from any mistake using `git reflog`
-- ✅ Set up GitHub Actions for CI/CD automation
+- ✅ Understand all three modes of `git reset` (--soft, --mixed, --hard)
+- ✅ Know when to use `git restore` vs `git reset` vs `git revert`
+- ✅ Delete untracked files safely with `git clean`
+
+**GitHub & Advanced Tools**
+- ✅ Create and manage Git tags for releases (with semantic versioning)
+- ✅ Write `.gitignore` files with full pattern syntax (`*`, `**`, `!`, nested folders)
+- ✅ Use `git bisect` to find exactly which commit broke your code
+- ✅ Use `git blame` to understand who wrote any line and why
+- ✅ Write GitHub Actions workflows for CI/CD automation
 - ✅ Deploy static sites with GitHub Pages
 - ✅ Use GitHub Wikis and Projects for documentation and planning
 
@@ -125,22 +150,22 @@ GIT&GITHUB/
 ├── .gitignore                         ← Standard development .gitignore
 │
 ├── 00-Introduction/
-│   └── README.md                      ← Why Git? VCS types, 3 states, install, config
+│   └── README.md                      ← Why Git? Git vs GitHub, 3 states, install, config, what is a repo
 │
 ├── 01-Foundations/
-│   └── README.md                      ← init, add, commit, status, log, diff
+│   └── README.md                      ← init, add (5 forms), commit, status, log (8 variants), diff, rm, mv
 │
 ├── 02-Intermediate-Workflows/
-│   └── README.md                      ← Branches, HEAD, merge types, stash
+│   └── README.md                      ← Branches, HEAD, detached HEAD, switch vs checkout, merge types, stash
 │
 ├── 03-Remote-Collaboration/
-│   └── README.md                      ← Remotes, push, pull, fetch, PRs
+│   └── README.md                      ← Remotes, push (mechanics), fetch vs pull, HTTPS/SSH, fork workflow, PRs
 │
 ├── 04-Advanced-Git/
-│   └── README.md                      ← Rebase, cherry-pick, reflog, reset, restore
+│   └── README.md                      ← Rebase, cherry-pick, reflog, reset (3 modes), restore, clean
 │
 ├── 05-GitHub-Expertise/
-│   └── README.md                      ← Actions, Wikis, Projects, Pages
+│   └── README.md                      ← Tags, .gitignore, bisect, blame, Actions, Wikis, Projects, Pages
 │
 └── Practice-Lab/
     ├── README.md                      ← Instructions for forked users
@@ -153,13 +178,13 @@ GIT&GITHUB/
 
 | Module | Title | Key Commands & Concepts | Diagram Type |
 |:---:|---|---|:---:|
-| [00](00-Introduction/README.md) | **Introduction — Why Git? Setup & Configuration** | `git config`, `git --version`, VCS history, 3 states | `graph TD` |
-| [01](01-Foundations/README.md) | **Foundations — Init, Add, Commit, Status, Log** | `git init`, `git add`, `git commit`, `git status`, `git log`, `git diff` | `sequenceDiagram` |
-| [02](02-Intermediate-Workflows/README.md) | **Intermediate Workflows — Branching, Merging & Stashing** | `git branch`, `git switch`, `git merge`, `git stash`, fast-forward vs 3-way | `gitGraph` ×3 |
-| [03](03-Remote-Collaboration/README.md) | **Remote Collaboration — Remotes, Push, Pull & Pull Requests** | `git remote`, `git push`, `git pull`, `git fetch`, `--force-with-lease`, PRs | `sequenceDiagram` |
-| [04](04-Advanced-Git/README.md) | **Advanced Git — Rebase, Cherry-pick, Reflog & History Rewriting** | `git rebase -i`, `git cherry-pick`, `git reflog`, `git reset`, `git restore` | `gitGraph` ×2 |
-| [05](05-GitHub-Expertise/README.md) | **GitHub Expertise — Actions, Wikis, Projects & Pages** | GitHub Actions YAML, Pages, Wikis, Projects, CI/CD | `flowchart TD` |
-| [Lab](Practice-Lab/README.md) | **Practice Lab — 30-Day Git Dojo** | Daily commit logs, fork workflow, habit building | — |
+| [00](00-Introduction/README.md) | **Introduction — Why Git? Setup & Configuration** | `git config`, `git --version`, VCS history, 3 states, Git vs GitHub, what is a repository | `graph TD` |
+| [01](01-Foundations/README.md) | **Foundations — Init, Add, Commit, Status, Log** | `git init`, `git add` (5 forms), `git commit`, `git status`, `git log` (8 variants), `git diff`, `git rm`, `git mv` | `sequenceDiagram` |
+| [02](02-Intermediate-Workflows/README.md) | **Intermediate Workflows — Branching, Merging & Stashing** | `git branch`, `git switch` vs `git checkout`, `git merge`, `git stash`, HEAD & detached HEAD, fast-forward vs 3-way | `gitGraph` ×3 |
+| [03](03-Remote-Collaboration/README.md) | **Remote Collaboration — Remotes, Push, Pull & Pull Requests** | `git remote`, `git push` (5-step mechanics), `git pull` vs `git fetch`, HTTPS vs SSH auth, fork workflow, PRs | `sequenceDiagram` |
+| [04](04-Advanced-Git/README.md) | **Advanced Git — Rebase, Cherry-pick, Reflog & History Rewriting** | `git rebase -i`, `git cherry-pick`, `git reflog`, `git reset` (--soft/--mixed/--hard), `git restore`, `git clean` | `gitGraph` ×2 |
+| [05](05-GitHub-Expertise/README.md) | **GitHub Expertise — Actions, Wikis, Projects & Pages** | `git tag`, `.gitignore` patterns, `git bisect`, `git blame`, GitHub Actions YAML, Pages, Wikis, Projects | `flowchart TD` |
+| [Lab](Practice-Lab/README.md) | **Practice Lab — 30-Day Git Dojo** | Daily commit logs, fork workflow, stuck-recovery guide, 30-day pacing calendar | — |
 | [📋](CHEATSHEET.md) | **Complete Cheat Sheet** | All 77 commands in 14 categories with source attribution | — |
 
 ---
@@ -201,6 +226,70 @@ cd Git-Github
 ### Option C — Just Use the Cheat Sheet
 
 Go straight to **[CHEATSHEET.md](CHEATSHEET.md)** — it has all 77 commands organized into 14 categories with descriptions and source attribution. Bookmark it. Print it. Tattoo it (optional).
+
+---
+
+## 🍴 How to Fork & Use This Repository
+
+Forking creates your own personal copy of this repository on GitHub — separate from the original. You can commit your daily practice logs, notes, and exercises without affecting anyone else. Your changes are yours.
+
+**Clone** = read-only copy on your machine. **Fork** = your own copy on GitHub that you own and can push to.
+
+### Step 1 — Fork on GitHub
+
+1. Go to [github.com/abhishek01dev/Git-Github](https://github.com/abhishek01dev/Git-Github)
+2. Click the **Fork** button (top-right corner)
+3. Select your account — GitHub creates `YOUR-USERNAME/Git-Github` in seconds
+
+### Step 2 — Clone Your Fork
+
+```bash
+# Replace YOUR-USERNAME with your actual GitHub username
+git clone https://github.com/YOUR-USERNAME/Git-Github.git
+cd Git-Github
+```
+
+### Step 3 — Set the Original as `upstream`
+
+This lets you pull in future updates from the original repo while keeping your own changes.
+
+```bash
+git remote add upstream https://github.com/abhishek01dev/Git-Github.git
+
+# Verify both remotes exist
+git remote -v
+# origin    https://github.com/YOUR-USERNAME/Git-Github.git (fetch)
+# origin    https://github.com/YOUR-USERNAME/Git-Github.git (push)
+# upstream  https://github.com/abhishek01dev/Git-Github.git (fetch)
+# upstream  https://github.com/abhishek01dev/Git-Github.git (push)
+```
+
+### Step 4 — Keep Your Fork Synced
+
+When new modules, diagrams, or exercises are added to the original:
+
+```bash
+git fetch upstream          # download updates from original
+git merge upstream/main     # apply them to your local main
+git push origin main        # push the merged result to your fork
+```
+
+### Step 5 — Start Your Daily Practice Log
+
+```bash
+# Copy the template with today's date
+cp PRACTICE_TEMPLATE.md Practice-Lab/$(date +%Y-%m-%d)_Day-1_log.md
+
+# Fill it in, then commit and push
+git add Practice-Lab/
+git commit -m "log: Day 1 — Module 00 Introduction"
+git push origin main
+```
+
+Every push adds a green square to your GitHub contribution graph. After 30 days, you'll have a visible streak and a complete learning record.
+
+> [!TIP]
+> Share your fork link in the [Discussions](https://github.com/abhishek01dev/Git-Github/discussions) tab — it's motivating to see others' progress, and others will find yours motivating too.
 
 ---
 
@@ -320,7 +409,7 @@ Contributions make this project better for everyone. All skill levels welcome.
 **Style Guide:**
 - All command sections must be titled **"The 'Cheat Code' Section"** (exact wording)
 - Use GitHub-flavored callouts: `> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`
-- Every module README must have exactly 4 sections: Theory → Diagram → Cheat Code → Lab
+- Every module README must have exactly 5 sections: Theory → Diagram → Cheat Code → Lab → Practice Exercises
 - Always mention `git switch` as the modern alternative when documenting `git checkout`
 - Always mention `--force-with-lease` when documenting `--force`
 - All Mermaid diagrams must use ` ```mermaid ` code blocks
@@ -399,9 +488,9 @@ This project is built on the shoulders of excellent existing resources:
 ## 📊 Project Stats
 
 ```
-📦  12 files          🗂️  7 directories       📝  6 module READMEs
+📦  14 files          🗂️  7 directories       📝  6 module READMEs
 ⌨️  77 commands       📋  14 cheat sheet categories
-📅  30-day tracker    🔬  6 hands-on labs      📊  10 Mermaid diagrams
+📅  30-day tracker    🔬  6 practice exercise sets    📊  10 Mermaid diagrams
 ```
 
 ---
