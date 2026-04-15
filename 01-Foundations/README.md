@@ -19,14 +19,27 @@
 
 - [Learning Objectives](#-learning-objectives)
 - [1. Theoretical Explanation](#1-theoretical-explanation)
-  - [git init & .git/ Directory](#git-init-and-the-git-directory)
+  - [git init & the .git/ Directory](#git-init-and-the-git-directory)
   - [The Staging Area (Index)](#the-staging-area-index)
+  - [git add — What Exactly Happens?](#git-add--what-exactly-happens)
+  - [git commit — What Exactly Happens?](#git-commit--what-exactly-happens)
+  - [Reading git diff Output](#reading-git-diff-output)
+  - [Reading git log Output](#reading-git-log-output)
+  - [Removing and Renaming Files (git rm, git mv)](#removing-and-renaming-files-properly)
   - [Atomic Commits](#atomic-commits)
   - [Commit SHAs](#commit-shas)
   - [git status Output](#git-status-output)
 - [2. Visual Diagram](#2-visual-diagram)
 - [3. The "Cheat Code" Section](#3-the-cheat-code-section)
 - [4. Hands-on Lab](#4-hands-on-lab)
+- [5. Practice Exercises](#5-️-practice-exercises)
+  - [Exercise 1 — The Selective Stage (Stage 2 of 5 Files)](#exercise-1--the-selective-stage-core-skill)
+  - [Exercise 2 — The Two-State Diff](#exercise-2--the-two-state-diff)
+  - [Exercise 3 — Stage in Patches with git add -p](#exercise-3--stage-in-patches-with-git-add--p)
+  - [Exercise 4 — Three Atomic Commits](#exercise-4--three-atomic-commits)
+  - [Exercise 5 — Stage, Unstage, Re-stage](#exercise-5--stage-unstage-re-stage)
+  - [Exercise 6 — Read History Like a Pro](#exercise-6--read-history-like-a-pro)
+  - [Self-Assessment](#-module-01-self-assessment)
 
 ---
 

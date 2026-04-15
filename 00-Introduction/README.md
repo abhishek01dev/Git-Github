@@ -22,11 +22,20 @@
   - [What Is a VCS?](#what-is-a-version-control-system)
   - [Distributed vs. Centralized VCS](#distributed-vs-centralized-vcs)
   - [A Brief History of Git](#a-brief-history-of-git)
+  - [Git vs GitHub — What Is the Difference?](#git-vs-github--what-is-the-difference)
+  - [What Is a Repository?](#what-is-a-repository)
   - [Git's Three States](#gits-three-states)
   - [Installing Git](#installing-git)
 - [2. Visual Diagram](#2-visual-diagram)
 - [3. The "Cheat Code" Section](#3-the-cheat-code-section)
 - [4. Hands-on Lab](#4-hands-on-lab)
+- [5. Practice Exercises](#5-️-practice-exercises)
+  - [Exercise 1 — Verify Your Installation](#exercise-1--verify-your-installation)
+  - [Exercise 2 — Set Identity and Verify It Stuck](#exercise-2--set-identity-and-verify-it-stuck)
+  - [Exercise 3 — Create Three Useful Aliases](#exercise-3--create-three-useful-aliases)
+  - [Exercise 4 — Read Your .gitconfig Directly](#exercise-4--read-your-gitconfig-directly)
+  - [Exercise 5 — Set Your Default Editor](#exercise-5--set-your-default-editor)
+  - [Self-Assessment](#-module-00-self-assessment)
 
 ---
 
