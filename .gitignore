@@ -1,0 +1,57 @@
+# ============================================================
+# Git-Mastery-Hub — Standard .gitignore
+# ============================================================
+
+# ---- OS Files ----
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+
+# ---- Editor & IDE Files ----
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+.history/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ---- Node / npm Artifacts ----
+node_modules/
+npm-debug.log
+npm-debug.log.*
+yarn-error.log
+yarn.lock
+package-lock.json
+
+# ---- Python Artifacts ----
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+.env
+.venv
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# ---- General Temp Files ----
+*.log
+*.tmp
+*.swp
+*.swo
+*.bak
+*.orig
+
+# ---- User Practice Files (keep folder, ignore daily logs) ----
+Practice-Lab/daily-logs/
+
+# NOTE: .gitkeep is NOT ignored — it keeps the Practice-Lab/ folder tracked.
+.claude
