@@ -42,6 +42,7 @@
 - [Code of Conduct](#-code-of-conduct)
 - [License](#-license)
 - [Acknowledgements](#-acknowledgements)
+- [Interview Questions](#-interview-questions-per-module)
 
 ---
 
@@ -186,6 +187,12 @@ GIT&GITHUB/
 | [05](05-GitHub-Expertise/README.md) | **GitHub Expertise — Actions, Wikis, Projects & Pages** | `git tag`, `.gitignore` patterns, `git bisect`, `git blame`, GitHub Actions YAML, Pages, Wikis, Projects | `flowchart TD` |
 | [Lab](Practice-Lab/README.md) | **Practice Lab — 30-Day Git Dojo** | Daily commit logs, fork workflow, stuck-recovery guide, 30-day pacing calendar | — |
 | [📋](CHEATSHEET.md) | **Complete Cheat Sheet** | All 77 commands in 14 categories with source attribution | — |
+| [❓](00-Introduction/INTERVIEW_QUESTIONS.md) | **Module 00 Interview Questions** | Git vs GitHub, VCS types, config, 3 states — 25 Q&A | — |
+| [❓](01-Foundations/INTERVIEW_QUESTIONS.md) | **Module 01 Interview Questions** | add, commit, diff, log, rm, mv — 30 Q&A | — |
+| [❓](02-Intermediate-Workflows/INTERVIEW_QUESTIONS.md) | **Module 02 Interview Questions** | Branching, HEAD, merge types, stash, conflicts — 30 Q&A | — |
+| [❓](03-Remote-Collaboration/INTERVIEW_QUESTIONS.md) | **Module 03 Interview Questions** | Remotes, push, fetch vs pull, SSH, PRs — 32 Q&A | — |
+| [❓](04-Advanced-Git/INTERVIEW_QUESTIONS.md) | **Module 04 Interview Questions** | Reset (3 modes), rebase, reflog, cherry-pick, clean — 32 Q&A | — |
+| [❓](05-GitHub-Expertise/INTERVIEW_QUESTIONS.md) | **Module 05 Interview Questions** | Tags, .gitignore, bisect, blame, Actions, CI/CD — 30 Q&A | — |
 
 ---
 
@@ -463,6 +470,23 @@ copies or substantial portions of the Software.
 
 ---
 
+## ❓ Interview Questions Per Module
+
+Each module includes a dedicated `INTERVIEW_QUESTIONS.md` with real interview questions covering the module's content — from conceptual basics to tricky scenarios.
+
+| Module | File | Questions | Level |
+|:---:|---|:---:|---|
+| 00 | [Introduction — Q&A](00-Introduction/INTERVIEW_QUESTIONS.md) | 25 | Beginner |
+| 01 | [Foundations — Q&A](01-Foundations/INTERVIEW_QUESTIONS.md) | 30 | Beginner–Intermediate |
+| 02 | [Intermediate Workflows — Q&A](02-Intermediate-Workflows/INTERVIEW_QUESTIONS.md) | 30 | Intermediate |
+| 03 | [Remote Collaboration — Q&A](03-Remote-Collaboration/INTERVIEW_QUESTIONS.md) | 32 | Intermediate |
+| 04 | [Advanced Git — Q&A](04-Advanced-Git/INTERVIEW_QUESTIONS.md) | 32 | Advanced |
+| 05 | [GitHub Expertise — Q&A](05-GitHub-Expertise/INTERVIEW_QUESTIONS.md) | 30 | Advanced |
+
+**Total: 179 Q&A pairs** — conceptual questions, applied scenarios, output-reading exercises, and quick-fire rounds.
+
+---
+
 ## 🙏 Acknowledgements
 
 This project is built on the shoulders of excellent existing resources:
@@ -488,9 +512,9 @@ This project is built on the shoulders of excellent existing resources:
 ## 📊 Project Stats
 
 ```
-📦  14 files          🗂️  7 directories       📝  6 module READMEs
-⌨️  77 commands       📋  14 cheat sheet categories
-📅  30-day tracker    🔬  6 practice exercise sets    📊  10 Mermaid diagrams
+📦  20 files          🗂️  7 directories       📝  6 module READMEs
+⌨️  77 commands       📋  14 cheat sheet categories    ❓  179 interview Q&A
+📅  30-day tracker    🔬  6 practice exercise sets      📊  10 Mermaid diagrams
 ```
 
 ---
