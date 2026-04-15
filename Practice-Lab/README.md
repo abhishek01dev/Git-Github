@@ -29,7 +29,7 @@
 
 ## 👋 Welcome
 
-You're here because you've forked the **[Git-Mastery-Hub](../README.md)** repository. That single fork was itself a Git action — great job taking that step!
+You're here because you've forked the **[GIT&GITHUB](../README.md)** repository. That single fork was itself a Git action — great job taking that step!
 
 This `Practice-Lab/` folder is your personal workspace. The course modules teach you Git. This lab is where you *use* Git to learn Git — a deliberately recursive approach that builds muscle memory through repetition.
 
@@ -64,14 +64,14 @@ Each day you copy the practice template, fill it in after your session, and comm
 ```bash
 git remote -v
 # Should show YOUR username, not the upstream repo
-# origin  https://github.com/YOUR-USERNAME/Git-Mastery-Hub.git (fetch)
-# origin  https://github.com/YOUR-USERNAME/Git-Mastery-Hub.git (push)
+# origin  https://github.com/abhishek01dev/Git-Github.git (fetch)
+# origin  https://github.com/abhishek01dev/Git-Github.git (push)
 ```
 
 If you cloned the original instead of your fork:
 ```bash
 # Fix the remote to point to your fork
-git remote set-url origin https://github.com/YOUR-USERNAME/Git-Mastery-Hub.git
+git remote set-url origin https://github.com/abhishek01dev/Git-Github.git
 ```
 
 ---
@@ -288,11 +288,11 @@ git status                   # See what's staged/unstaged
 
 ## 🌐 Sharing Your Progress
 
-You're not alone in this. The Git-Mastery-Hub community is built from practitioners just like you.
+You're not alone in this. The GIT&GITHUB community is built from practitioners just like you.
 
 ### Share a check-in on GitHub Issues
 
-1. Go to the upstream **Git-Mastery-Hub** repository on GitHub
+1. Go to the upstream **GIT&GITHUB** repository on GitHub
 2. Click **Issues** → **New Issue**
 3. Use a title like: `[30-Day Log] Day 15 check-in — @yourhandle`
 4. Share:

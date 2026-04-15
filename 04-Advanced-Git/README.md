@@ -288,6 +288,6 @@ Your commit is back. You've got this — the reflog is always watching.
 
 **[📋 Full Cheat Sheet](../CHEATSHEET.md) · [🛠️ Practice Lab](../Practice-Lab/README.md) · [📄 License](../LICENSE)**
 
-*Part of the free, open-source [Git-Mastery-Hub](../README.md) curriculum — MIT Licensed.*
+*Part of the free, open-source [GIT&GITHUB](../README.md) curriculum — MIT Licensed.*
 
 </div>

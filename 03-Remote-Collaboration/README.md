@@ -179,7 +179,7 @@ This is the skill that makes Git truly powerful — connecting your local work t
 
 **Step 2 — Connect your local repo:**
 ```bash
-git remote add origin https://github.com/YOUR-USERNAME/my-first-repo.git
+git remote add origin https://github.com/abhishek01dev/my-first-repo.git
 ```
 
 **Step 3 — Push main:**
@@ -239,6 +239,6 @@ Your local main now includes the feature you merged via PR.
 
 **[📋 Full Cheat Sheet](../CHEATSHEET.md) · [🛠️ Practice Lab](../Practice-Lab/README.md) · [📄 License](../LICENSE)**
 
-*Part of the free, open-source [Git-Mastery-Hub](../README.md) curriculum — MIT Licensed.*
+*Part of the free, open-source [GIT&GITHUB](../README.md) curriculum — MIT Licensed.*
 
 </div>

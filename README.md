@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>🚀 Git-Mastery-Hub</h1>
+<h1>🚀 GIT&GITHUB</h1>
 <h3>Beginner to Advanced — The Complete, Free, Open-Source Git Learning Path</h3>
 
 <p><em>From your first <code>git init</code> to advanced history rewriting — structured modules, visual diagrams, hands-on labs, and a 30-day practice system.</em></p>
@@ -13,8 +13,8 @@
 [![Commands Covered](https://img.shields.io/badge/Commands%20Covered-77-purple.svg)](CHEATSHEET.md)
 [![Free to Use](https://img.shields.io/badge/Free%20to%20Use-✓-success.svg)](#-license)
 [![Open Source](https://img.shields.io/badge/Open%20Source-❤️-red.svg)](#-license)
-[![GitHub Stars](https://img.shields.io/github/stars/YOUR-USERNAME/Git-Mastery-Hub?style=social)](https://github.com/YOUR-USERNAME/Git-Mastery-Hub)
-[![GitHub Forks](https://img.shields.io/github/forks/YOUR-USERNAME/Git-Mastery-Hub?style=social)](https://github.com/YOUR-USERNAME/Git-Mastery-Hub/fork)
+[![GitHub Stars](https://img.shields.io/github/stars/abhishek01dev/Git-Github?style=social)](https://github.com/abhishek01dev/Git-Github)
+[![GitHub Forks](https://img.shields.io/github/forks/abhishek01dev/Git-Github?style=social)](https://github.com/abhishek01dev/Git-Github/fork)
 
 <br/>
 
@@ -27,7 +27,7 @@
 ## 📋 Table of Contents
 
 - [About This Project](#-about-this-project)
-- [Why Git-Mastery-Hub?](#-why-git-mastery-hub)
+- [Why GIT&GITHUB?](#-why-gitgithub)
 - [What You Will Learn](#-what-you-will-learn)
 - [Course Roadmap](#-course-roadmap)
 - [Repository Structure](#-repository-structure)
@@ -46,7 +46,7 @@
 
 ## 🧭 About This Project
 
-**Git-Mastery-Hub** is a free, open-source, self-contained Git and GitHub learning repository. It is structured as a 6-module course with hands-on terminal labs, Mermaid visual diagrams, a comprehensive 77-command cheat sheet, and a 30-day practice tracking system.
+**GIT&GITHUB** is a free, open-source, self-contained Git and GitHub learning repository. It is structured as a 6-module course with hands-on terminal labs, Mermaid visual diagrams, a comprehensive 77-command cheat sheet, and a 30-day practice tracking system.
 
 Everything here is written in plain Markdown — no login required, no paid tools, no subscriptions. Clone it, fork it, star it, contribute to it. It's yours.
 
@@ -54,11 +54,11 @@ Everything here is written in plain Markdown — no login required, no paid tool
 
 ---
 
-## 🌟 Why Git-Mastery-Hub?
+## 🌟 Why GIT&GITHUB?
 
-Most Git resources are either too shallow (a 5-minute overview) or too dense (the full `git --help` man page). Git-Mastery-Hub hits the sweet spot:
+Most Git resources are either too shallow (a 5-minute overview) or too dense (the full `git --help` man page). GIT&GITHUB hits the sweet spot:
 
-| Feature | Git-Mastery-Hub | Random Blog Post | Official Docs |
+| Feature | GIT&GITHUB | Random Blog Post | Official Docs |
 |---|:---:|:---:|:---:|
 | Structured learning path | ✅ | ❌ | ❌ |
 | Visual diagrams for every concept | ✅ | Sometimes | ❌ |
@@ -115,7 +115,7 @@ Each module builds directly on the previous one. Beginners: start at `00`. Exper
 ## 📁 Repository Structure
 
 ```
-Git-Mastery-Hub/
+GIT&GITHUB/
 │
 ├── README.md                          ← You are here — project landing page
 ├── CHEATSHEET.md                      ← 77 commands, 14 categories, all in one file
@@ -170,10 +170,10 @@ Git-Mastery-Hub/
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR-USERNAME/Git-Mastery-Hub.git
+git clone https://github.com/abhishek01dev/Git-Github.git
 
 # Navigate into it
-cd Git-Mastery-Hub
+cd Git-Github
 
 # Start at the beginning
 # Open 00-Introduction/README.md in your editor or browser
@@ -184,8 +184,8 @@ cd Git-Mastery-Hub
 1. Click **Fork** at the top-right of this GitHub page.
 2. Clone your fork:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/Git-Mastery-Hub.git
-   cd Git-Mastery-Hub
+   git clone https://github.com/abhishek01dev/Git-Github.git
+   cd Git-Github
    ```
 3. Copy and rename the practice template:
    ```bash
@@ -344,7 +344,7 @@ This project is licensed under the **MIT License** — one of the most permissiv
 ```
 MIT License
 
-Copyright (c) 2026 Git-Mastery-Hub Contributors
+Copyright (c) 2026 GIT&GITHUB Contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -390,9 +390,9 @@ This project is built on the shoulders of excellent existing resources:
 
 | Channel | Purpose |
 |---|---|
-| [Open an Issue](https://github.com/YOUR-USERNAME/Git-Mastery-Hub/issues) | Bug reports, content errors, feature requests |
-| [Start a Discussion](https://github.com/YOUR-USERNAME/Git-Mastery-Hub/discussions) | Questions, show your 30-day progress, tips |
-| [Pull Requests](https://github.com/YOUR-USERNAME/Git-Mastery-Hub/pulls) | Contribute improvements |
+| [Open an Issue](https://github.com/abhishek01dev/Git-Github/issues) | Bug reports, content errors, feature requests |
+| [Start a Discussion](https://github.com/abhishek01dev/Git-Github/discussions) | Questions, show your 30-day progress, tips |
+| [Pull Requests](https://github.com/abhishek01dev/Git-Github/pulls) | Contribute improvements |
 
 ---
 
@@ -410,7 +410,7 @@ This project is built on the shoulders of excellent existing resources:
 
 **If this repository helped you, please consider giving it a ⭐ — it helps others find it.**
 
-[![Star this repo](https://img.shields.io/github/stars/YOUR-USERNAME/Git-Mastery-Hub?style=for-the-badge)](https://github.com/YOUR-USERNAME/Git-Mastery-Hub)
+[![Star this repo](https://img.shields.io/github/stars/abhishek01dev/Git-Github?style=for-the-badge)](https://github.com/abhishek01dev/Git-Github)
 
 <br/>
 

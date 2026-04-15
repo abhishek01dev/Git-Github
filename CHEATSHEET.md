@@ -245,4 +245,4 @@
 
 ---
 
-*Part of the [Git-Mastery-Hub](../README.md) learning path.*
+*Part of the [GIT&GITHUB](../README.md) learning path.*

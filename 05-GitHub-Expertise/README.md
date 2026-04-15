@@ -177,7 +177,7 @@ mkdir docs
 **Step 2 — Add an index page:**
 ```bash
 echo "# Hello from GitHub Pages!" > docs/index.md
-echo "This site is built from my Git-Mastery-Hub learning repo." >> docs/index.md
+echo "This site is built from my GIT&GITHUB learning repo." >> docs/index.md
 ```
 
 **Step 3 — Stage and push:**
@@ -195,7 +195,7 @@ git push origin main
 
 **Step 5 — Visit your site:**
 ```
-https://YOUR-USERNAME.github.io/my-first-repo
+https://abhishek01dev.github.io/my-first-repo
 ```
 It may take 1–2 minutes to deploy on the first run.
 
@@ -247,6 +247,6 @@ Congratulations! You've deployed a site and automated your first workflow. This 
 
 *You've completed all 6 modules! Time to put it into practice — head to the [Practice Lab](../Practice-Lab/README.md).*
 
-*Part of the free, open-source [Git-Mastery-Hub](../README.md) curriculum — MIT Licensed.*
+*Part of the free, open-source [GIT&GITHUB](../README.md) curriculum — MIT Licensed.*
 
 </div>

@@ -1,10 +1,10 @@
 <div align="center">
 
-<h1>🤝 Contributing to Git-Mastery-Hub</h1>
+<h1>🤝 Contributing to GIT&GITHUB</h1>
 
 <p><em>Thank you for taking the time to contribute! Every correction, improvement, and new lab exercise makes this resource better for thousands of learners.</em></p>
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/YOUR-USERNAME/Git-Mastery-Hub/pulls)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/abhishek01dev/Git-Github/pulls)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 </div>
@@ -73,14 +73,14 @@ All skill levels are welcome. Here are some great ways to get started:
 
 ## 🛠️ Development Setup
 
-Git-Mastery-Hub is pure Markdown — no build step, no dependencies. All you need is:
+GIT&GITHUB is pure Markdown — no build step, no dependencies. All you need is:
 
 ```bash
 # 1. Fork the repository (click Fork on GitHub)
 
 # 2. Clone your fork
-git clone https://github.com/YOUR-USERNAME/Git-Mastery-Hub.git
-cd Git-Mastery-Hub
+git clone https://github.com/abhishek01dev/Git-Github.git
+cd Git-Github
 
 # 3. Create a feature branch (NEVER commit directly to main)
 git switch -c fix/typo-in-module-01
@@ -110,7 +110,7 @@ Fork → Clone → Branch → Edit → Commit → Push → Pull Request → Revi
 
 ```bash
 # 1. Keep your fork up to date with upstream
-git remote add upstream https://github.com/ORIGINAL-USERNAME/Git-Mastery-Hub.git
+git remote add upstream https://github.com/abhishek01dev/Git-Github.git
 git fetch upstream
 git merge upstream/main
 
@@ -242,7 +242,7 @@ Before submitting, verify:
 4. Once approved, a maintainer will merge your PR.
 5. Your contribution will be credited in the repository's commit history.
 
-Thank you for helping make Git-Mastery-Hub better for everyone. 🙏
+Thank you for helping make GIT&GITHUB better for everyone. 🙏
 
 ---
 

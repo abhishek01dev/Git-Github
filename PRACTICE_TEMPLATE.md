@@ -797,4 +797,4 @@ Looking back over 30 days:
 
 *Completed 30-Day Git Mastery Challenge — [Your Name] — [End Date]*
 
-**Share your achievement:** Open an Issue in the Git-Mastery-Hub repo to let the community know you completed the challenge!
+**Share your achievement:** Open an Issue in the GIT&GITHUB repo to let the community know you completed the challenge!
