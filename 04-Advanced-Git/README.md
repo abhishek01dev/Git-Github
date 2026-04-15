@@ -280,6 +280,267 @@ Your commit is back. You've got this — the reflog is always watching.
 
 ---
 
+## 5. 🏋️ Practice Exercises
+
+> These are the commands senior engineers use every single day. Practice each one deliberately — the muscle memory will save you in production situations.
+
+---
+
+### Exercise 1 — Fix a Bad Commit Message (Amend)
+You committed with a typo or a vague message. Fix it before it's public.
+
+**Task:**
+```bash
+mkdir amend-practice && cd amend-practice
+git init
+echo "some work" > work.txt
+git add work.txt
+git commit -m "feat: add wrk file"   # intentional typo: "wrk"
+
+# Check the bad message
+git log --oneline
+
+# Fix it with amend
+git commit --amend -m "feat: add work file"
+
+# Verify the fix
+git log --oneline
+```
+
+- [ ] **Done** when `git log --oneline` shows the corrected message
+- [ ] Notice the SHA changed — amend creates a new commit
+
+> [!WARNING]
+> Only amend commits that have NOT been pushed to a shared remote. Amending a pushed commit rewrites history and will force-push everyone on the team into confusion.
+
+---
+
+### Exercise 2 — Add a Forgotten File to Last Commit
+You committed and immediately realized you forgot to include a file.
+
+**Task:**
+```bash
+mkdir forgot-file && cd forgot-file
+git init
+echo "main file" > main.txt
+git add main.txt && git commit -m "feat: add main file"
+
+# Oops — forgot config.txt
+echo "database_url=localhost" > config.txt
+
+# Add it to the LAST commit without changing the message
+git add config.txt
+git commit --amend --no-edit
+
+# Verify both files are in the commit
+git show --stat HEAD
+```
+
+- [ ] **Done** when `git show --stat HEAD` shows both `main.txt` AND `config.txt` in the last commit
+- [ ] Notice the total commit count is still 1 — not 2
+
+---
+
+### Exercise 3 — Squash Messy WIP Commits into One Clean Commit
+The most common use of interactive rebase: clean up before opening a PR.
+
+**Setup:**
+```bash
+mkdir squash-practice && cd squash-practice
+git init && echo "base" > base.txt && git add . && git commit -m "init"
+git switch -c feature/messy-history
+
+# Make 4 quick "wip" commits (this is realistic work-in-progress)
+echo "step 1" >> feature.txt && git add . && git commit -m "wip"
+echo "step 2" >> feature.txt && git add . && git commit -m "wip 2"
+echo "step 3" >> feature.txt && git add . && git commit -m "fix typo"
+echo "step 4" >> feature.txt && git add . && git commit -m "wip final"
+
+git log --oneline   # 4 messy commits
+```
+
+**Task:** Squash all 4 into one clean commit using interactive rebase.
+```bash
+git rebase -i HEAD~4
+```
+
+In the editor that opens, change lines 2–4 from `pick` to `fixup`:
+```
+pick  <sha>  wip
+fixup <sha>  wip 2
+fixup <sha>  fix typo
+fixup <sha>  wip final
+```
+
+Save and exit. Then rename the single resulting commit:
+```bash
+git commit --amend -m "feat: implement feature in 4 steps"
+git log --oneline   # Should show 1 clean commit (+ init)
+```
+
+- [ ] **Done** when `git log --oneline` on the feature branch shows exactly 2 commits total
+
+---
+
+### Exercise 4 — Rebase a Branch onto Main (Linear History)
+Clean up your feature branch so it looks like it was built on the latest main.
+
+**Task:**
+```bash
+mkdir rebase-onto && cd rebase-onto
+git init && echo "init" > base.txt && git add . && git commit -m "init"
+
+# Create feature branch from this point
+git switch -c feature/rebase-me
+echo "feature work" > feature.txt
+git add . && git commit -m "feat: feature work"
+
+# Meanwhile, main gets a new commit (simulating teammate work)
+git switch main
+echo "teammate work" > teammate.txt
+git add . && git commit -m "feat: teammate's commit"
+
+# Check the graph BEFORE rebase
+git log --oneline --graph --all
+# You'll see two diverging paths
+
+# Rebase feature onto main
+git switch feature/rebase-me
+git rebase main
+
+# Check the graph AFTER rebase
+git log --oneline --graph --all
+# Now it's a straight line — feature is on TOP of main
+```
+
+- [ ] **Done** when the graph after rebase shows a linear history (no fork)
+- [ ] Notice the feature commit has a NEW SHA — rebase rewrites commits
+
+---
+
+### Exercise 5 — Cherry-Pick a Specific Commit
+Copy one useful commit onto a different branch without merging the whole branch.
+
+**Scenario:** A bug fix was committed on `feature/experimental` but you need it on `main` right now — without merging the unfinished feature.
+
+**Task:**
+```bash
+mkdir cherry-pick && cd cherry-pick
+git init && echo "v1" > app.txt && git add . && git commit -m "init: app v1"
+
+# Create a feature branch with multiple commits
+git switch -c feature/experimental
+echo "experimental stuff" >> app.txt && git add . && git commit -m "feat: experimental"
+echo "fix: null pointer bug" >> app.txt && git add . && git commit -m "fix: null pointer bug"
+echo "more experiments" >> app.txt && git add . && git commit -m "feat: more experiments"
+
+# Get the SHA of ONLY the bug fix commit
+git log --oneline feature/experimental
+# Copy the SHA of "fix: null pointer bug"
+
+# Back to main — cherry-pick ONLY the bug fix
+git switch main
+git cherry-pick <SHA-of-the-bugfix-commit>
+
+# Verify: main has the bug fix but NOT the experimental work
+git log --oneline main
+```
+
+- [ ] **Done** when `git log --oneline main` shows the cherry-picked bug fix commit
+- [ ] Verify with `cat app.txt` on main — it should have the null pointer fix content but NOT "experimental stuff"
+
+---
+
+### Exercise 6 — The Full Reflog Recovery Drill
+This is the most important recovery skill in Git. Practice until it feels routine.
+
+**Task:**
+```bash
+mkdir reflog-drill && cd reflog-drill
+git init
+echo "precious work" > precious.txt
+git add . && git commit -m "feat: precious work (DO NOT LOSE THIS)"
+echo "more precious work" >> precious.txt
+git add . && git commit -m "feat: more precious work"
+
+# Note your current position
+git log --oneline
+# Let's say: abc1234 feat: more precious work
+
+# DISASTER: hard reset to 2 commits ago
+git reset --hard HEAD~2
+
+# The commits are "gone"
+git log --oneline   # Only the init commit?? Where's precious work??
+
+# RECOVERY: use reflog to find what was lost
+git reflog
+# Look for lines like: abc1234 HEAD@{1}: commit: feat: more precious work
+
+# Restore the lost state
+git reset --hard abc1234   # use the actual SHA from your reflog
+git log --oneline           # precious work is back!
+cat precious.txt            # content is back!
+```
+
+- [ ] **Done** when `precious.txt` contains "more precious work" after recovery
+- [ ] Run `git reflog` after recovery and trace exactly what happened step by step
+
+> [!NOTE]
+> The reflog retains lost commits for ~30 days. After that, they are garbage collected. This is your safety window — don't wait more than 30 days to recover.
+
+---
+
+### Exercise 7 — Discard Changes Surgically with `git restore`
+Learn the three levels of discarding: one file, all files, staged file.
+
+**Task:**
+```bash
+mkdir restore-practice && cd restore-practice
+git init
+echo "line 1" > a.txt && echo "line 1" > b.txt && echo "line 1" > c.txt
+git add . && git commit -m "init: all three files"
+
+# Make changes to all three
+echo "unwanted change" >> a.txt
+echo "unwanted change" >> b.txt
+echo "wanted change" >> c.txt
+
+# Stage all changes
+git add .
+git status   # all three staged
+
+# Discard ONLY a.txt (staged + working directory)
+git restore --staged --worktree a.txt
+git status   # a.txt is clean, b.txt and c.txt still staged
+
+# Discard b.txt from staging but KEEP the working directory change
+git restore --staged b.txt
+git status   # b.txt is unstaged (modified), c.txt still staged
+
+# Keep c.txt staged — that's the wanted change
+git commit -m "feat: add wanted change to c.txt"
+git diff   # b.txt still shows its change (unstaged)
+```
+
+- [ ] **Done** when `c.txt` is committed, `a.txt` is clean, and `b.txt` has an unstaged change
+
+---
+
+### 🎯 Module 04 Self-Assessment
+
+| Challenge | Confident? |
+|---|:---:|
+| Amend a commit message without creating a new commit | ☐ Yes ☐ Need practice |
+| Add a forgotten file to the last commit | ☐ Yes ☐ Need practice |
+| Squash 4 wip commits into 1 with `git rebase -i` | ☐ Yes ☐ Need practice |
+| Rebase a feature branch onto an updated main | ☐ Yes ☐ Need practice |
+| Cherry-pick one specific commit from another branch | ☐ Yes ☐ Need practice |
+| Recover a "lost" commit using `git reflog` | ☐ Yes ☐ Need practice |
+| Discard changes to one file without touching others | ☐ Yes ☐ Need practice |
+
+---
+
 <div align="center">
 
 | ← Previous | Home | Next → |

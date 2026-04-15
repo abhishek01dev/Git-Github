@@ -229,6 +229,105 @@ You will see: `fatal: not a git repository`. **This is correct at this stage!** 
 
 ---
 
+## 5. 🏋️ Practice Exercises
+
+> Complete these before moving to Module 01. Each one takes under 5 minutes and builds real muscle memory. Check off each task as you finish it.
+
+---
+
+### Exercise 1 — Verify Your Installation
+**Task:** Run the version command and confirm Git is installed correctly.
+```bash
+git --version
+```
+- [ ] **Done** when you see `git version 2.x.x` (any version ≥ 2.23 is fine)
+
+**Confidence check:** Can you explain where Git is installed on your machine?
+
+---
+
+### Exercise 2 — Set Identity and Verify It Stuck
+**Task:** Set your name and email, then verify both were saved.
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+git config --list | grep user
+```
+- [ ] **Done** when `git config --list` shows your name and email in the output
+
+> [!NOTE]
+> `git config --list` shows every configuration key. Look for the lines starting with `user.name` and `user.email`.
+
+---
+
+### Exercise 3 — Create Three Useful Aliases
+**Task:** Create these three shortcuts and test each one.
+```bash
+git config --global alias.st status
+git config --global alias.lg "log --oneline --graph --all"
+git config --global alias.last "log -1 HEAD"
+```
+Test them (you'll see "not a git repository" errors — that's fine at this stage):
+```bash
+git st
+git lg
+git last
+```
+- [ ] **Done** when all three commands run without a "no such command" error
+
+**What you built:** `git st` = status, `git lg` = visual log, `git last` = see your most recent commit at a glance. You'll use these constantly.
+
+---
+
+### Exercise 4 — Read Your .gitconfig Directly
+**Task:** Open and read your global config file without using `git config`.
+```bash
+# macOS / Linux
+cat ~/.gitconfig
+
+# Windows
+cat C:/Users/YOUR-WINDOWS-USERNAME/.gitconfig
+```
+- [ ] **Done** when you can see the `[user]`, `[color]`, and `[alias]` sections in the output
+
+**Why this matters:** Your `.gitconfig` is just a text file. You can edit it directly in any editor. Knowing where it lives means you can always fix a misconfiguration.
+
+---
+
+### Exercise 5 — Set Your Default Editor
+**Task:** Tell Git which editor to open when it needs you to write a message.
+```bash
+# VS Code
+git config --global core.editor "code --wait"
+
+# Nano (beginner-friendly terminal editor)
+git config --global core.editor nano
+
+# Vim (if you're brave)
+git config --global core.editor vim
+```
+- [ ] **Done** when `git config --global core.editor` shows your chosen editor
+
+> [!TIP]
+> The `--wait` flag for VS Code tells Git to wait until you close the editor tab before continuing. Without it, Git won't see your message.
+
+---
+
+### 🎯 Module 00 Self-Assessment
+
+Before moving on, answer these without looking at the notes:
+
+| Question | Answer |
+|---|---|
+| What is the difference between Git and GitHub? | *(write your answer)* |
+| What are Git's three states for a file? | *(write your answer)* |
+| What does `--global` do in a git config command? | *(write your answer)* |
+| Where is your global config stored? | *(write your answer)* |
+
+If you can answer all four, you're ready for Module 01. If not, re-read the relevant section and try again — understanding is more valuable than speed.
+
+---
+
 <div align="center">
 
 | ← Previous | Home | Next → |

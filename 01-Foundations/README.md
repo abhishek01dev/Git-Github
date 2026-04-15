@@ -226,6 +226,217 @@ You now have two commits. Congratulations — you understand the core Git workfl
 
 ---
 
+## 5. 🏋️ Practice Exercises
+
+> These exercises are designed to be done in a real terminal on real files. Don't just read them — run them. Confidence comes from doing, not watching.
+
+---
+
+### Exercise 1 — The Selective Stage (Core Skill)
+You have 5 files. You must stage **only 2** of them. Everything else stays untracked.
+
+**Setup:**
+```bash
+mkdir staging-practice && cd staging-practice
+git init
+echo "File A content" > file-a.txt
+echo "File B content" > file-b.txt
+echo "File C content" > file-c.txt
+echo "File D content" > file-d.txt
+echo "File E content" > file-e.txt
+git status
+```
+
+**Your task:** Stage `file-b.txt` and `file-d.txt` only. Do NOT touch the others.
+```bash
+# Only these two:
+git add file-b.txt file-d.txt
+git status
+```
+
+- [ ] **Done** when `git status` shows `file-b.txt` and `file-d.txt` under "Changes to be committed" (green) and the other three under "Untracked files" (red)
+
+> [!TIP]
+> You can stage multiple files in one `git add` command by listing them space-separated. You can also use `git add *.txt` but that would stage all five — not what we want here.
+
+---
+
+### Exercise 2 — The Two-State Diff
+Modify a file, stage it, then modify it again. See all three states at once.
+
+**Setup** (continue in `staging-practice/`):
+```bash
+echo "Original line" > story.txt
+git add story.txt
+```
+
+Now modify it AGAIN before committing:
+```bash
+echo "New line added after staging" >> story.txt
+```
+
+**Your tasks:**
+```bash
+git diff           # What does this show?
+git diff --staged  # What does this show?
+git diff HEAD      # What does this show?
+git status         # Notice story.txt appears in BOTH sections
+```
+
+- [ ] **Done** when you can explain the difference between all three diff outputs
+
+**Expected insight:** `git diff` shows the unstaged change (the new line). `git diff --staged` shows the staged version. `git status` shows `story.txt` listed twice — once staged, once modified. This is Git's staging area working as designed.
+
+---
+
+### Exercise 3 — Stage in Patches with `git add -p`
+Stage only one part of a file that has two separate changes.
+
+**Setup:**
+```bash
+cat > features.txt << 'EOF'
+Feature 1: User login
+Feature 2: User logout
+Feature 3: Password reset
+EOF
+git add features.txt && git commit -m "add: initial features list"
+```
+
+Now make two unrelated changes in the same file:
+```bash
+sed -i 's/User login/User login via OAuth/' features.txt
+echo "Feature 4: Email verification" >> features.txt
+```
+
+**Your task:** Use `git add -p` to stage ONLY the OAuth change, not the new Feature 4 line.
+```bash
+git add -p features.txt
+# Press 's' to split the hunk if Git shows both changes together
+# Press 'y' to stage the hunk you want
+# Press 'n' to skip the hunk you don't want
+git diff --staged   # Should show only the OAuth change
+git diff            # Should show only the Feature 4 line
+```
+
+- [ ] **Done** when `git diff --staged` shows only the OAuth line and `git diff` shows only Feature 4
+
+---
+
+### Exercise 4 — Three Atomic Commits
+Practice the discipline of one logical change = one commit.
+
+**Task:** From scratch, create a project with exactly 3 commits — each covering one logical change.
+
+```bash
+mkdir atomic-commits && cd atomic-commits
+git init
+
+# Commit 1: Project scaffold
+echo "# My Project" > README.md
+git add README.md
+git commit -m "docs: add initial README"
+
+# Commit 2: Add a feature file
+echo "function greet() { return 'hello'; }" > greet.js
+git add greet.js
+git commit -m "feat: add greet function"
+
+# Commit 3: Add documentation for the feature
+echo "## greet()\nReturns the string 'hello'." >> README.md
+git add README.md
+git commit -m "docs: document greet function in README"
+```
+
+Verify:
+```bash
+git log --oneline
+```
+
+- [ ] **Done** when `git log --oneline` shows exactly 3 commits with descriptive messages
+
+**Why this matters:** Real-world Git history is read by humans. A commit named `feat: add greet function` tells a reviewer exactly what changed and why — without opening a single file.
+
+---
+
+### Exercise 5 — Stage, Unstage, Re-stage
+Practice the full staging area cycle: add → reset → add selectively.
+
+**Task:**
+```bash
+mkdir unstage-practice && cd unstage-practice
+git init
+echo "content" > alpha.txt
+echo "content" > beta.txt
+echo "content" > gamma.txt
+
+# Stage all three
+git add .
+git status   # All three staged
+
+# Unstage beta.txt only
+git reset beta.txt
+git status   # alpha and gamma staged, beta untracked
+
+# Unstage everything
+git reset
+git status   # All three untracked again
+
+# Now stage only gamma.txt
+git add gamma.txt
+git commit -m "feat: add gamma only"
+git status   # alpha and beta still untracked, gamma committed
+```
+
+- [ ] **Done** when the final `git status` shows only `alpha.txt` and `beta.txt` as untracked
+
+---
+
+### Exercise 6 — Read History Like a Pro
+Practice the different ways to view commit history.
+
+**Task** (use the `atomic-commits` repo from Exercise 4):
+```bash
+# Full history
+git log
+
+# Condensed
+git log --oneline
+
+# With graph (useful once you have branches)
+git log --oneline --graph --all
+
+# Last commit only
+git log -1
+
+# History of one specific file
+git log --oneline README.md
+
+# See what actually changed in the last commit
+git show HEAD
+```
+
+- [ ] **Done** when you understand what each command outputs and when you'd use each one
+
+---
+
+### 🎯 Module 01 Self-Assessment
+
+Test yourself — can you do each of these from memory?
+
+| Challenge | Confident? |
+|---|:---:|
+| Create a new repo from scratch | ☐ Yes ☐ Need practice |
+| Stage 2 out of 5 files | ☐ Yes ☐ Need practice |
+| Unstage a file without losing changes | ☐ Yes ☐ Need practice |
+| Explain what `git diff` vs `git diff --staged` shows | ☐ Yes ☐ Need practice |
+| Use `git add -p` to stage partial changes | ☐ Yes ☐ Need practice |
+| Write a good atomic commit message | ☐ Yes ☐ Need practice |
+| Read history with `git log --oneline` | ☐ Yes ☐ Need practice |
+
+Mark every row "Yes" before moving to Module 02. Any "Need practice" rows → go back and redo that exercise.
+
+---
+
 <div align="center">
 
 | ← Previous | Home | Next → |

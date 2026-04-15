@@ -231,6 +231,225 @@ Your local main now includes the feature you merged via PR.
 
 ---
 
+## 5. 🏋️ Practice Exercises
+
+> Remote collaboration is where Git becomes a team sport. These exercises simulate the real daily workflow used by professional engineering teams.
+
+---
+
+### Exercise 1 — Verify Your Remote Setup
+Before pushing anything, always confirm your remote is correctly pointed.
+
+**Task:**
+```bash
+# Check your remotes
+git remote -v
+
+# Should show:
+# origin  https://github.com/abhishek01dev/Git-Github.git (fetch)
+# origin  https://github.com/abhishek01dev/Git-Github.git (push)
+
+# Get more detail about the origin remote
+git remote show origin
+```
+
+- [ ] **Done** when you can see both fetch and push URLs pointing to your repository
+- [ ] **Done** when `git remote show origin` shows which local branch tracks which remote branch
+
+> [!TIP]
+> If the remote URL is wrong, fix it without deleting and re-adding: `git remote set-url origin <correct-url>`
+
+---
+
+### Exercise 2 — Push ONLY a Feature Branch (Not Main)
+Practice pushing a specific branch rather than always pushing main.
+
+**Task:**
+```bash
+# Create a feature branch with one commit
+git switch -c feature/exercise-remote
+echo "Remote exercise content" > remote-test.txt
+git add remote-test.txt
+git commit -m "feat: add remote test file"
+
+# Push ONLY this branch — main is NOT pushed
+git push -u origin feature/exercise-remote
+
+# Verify: check GitHub — you should see the new branch in the branches dropdown
+# But main should be unchanged
+```
+
+- [ ] **Done** when your GitHub repo shows `feature/exercise-remote` branch in the branches list
+- [ ] **Done** when the file `remote-test.txt` exists on the remote branch but NOT on main
+
+**Cleanup after:**
+```bash
+git switch main
+git branch -d feature/exercise-remote
+git push origin --delete feature/exercise-remote  # Delete remote branch too
+```
+
+---
+
+### Exercise 3 — Fetch vs Pull: Feel the Difference
+Experience firsthand why `git fetch` is safer than `git pull`.
+
+**Task:**
+
+First, make a change directly in GitHub's UI:
+1. Go to your repo on GitHub
+2. Edit `README.md` online — add any line
+3. Commit it directly on `main` in GitHub
+
+Now back in your terminal:
+```bash
+# Step A: fetch only (SAFE — doesn't change your local files)
+git fetch origin main
+git status
+# You'll see: "Your branch is behind 'origin/main' by 1 commit"
+
+# Step B: See what changed BEFORE merging
+git log HEAD..origin/main --oneline
+# This shows commits on remote that you don't have locally
+
+# Step C: Look at the actual diff
+git diff HEAD origin/main
+
+# Step D: Now decide to merge (or rebase)
+git merge origin/main
+```
+
+- [ ] **Done** when your local README matches the GitHub version after the merge
+
+**The point:** `git fetch` let you inspect the change before accepting it. `git pull` would have merged blindly. Fetch first, inspect, then merge — always.
+
+---
+
+### Exercise 4 — Simulate a Rejected Push and Fix It
+This is the most common error new Git users panic about. Practice it so it becomes routine.
+
+**Setup:** Make the remote "ahead" of your local branch.
+1. Make a commit directly on GitHub (edit any file in the UI)
+
+**Then on your local machine — without pulling — make a different commit:**
+```bash
+echo "Local change" >> README.md
+git add README.md
+git commit -m "docs: local change"
+
+# Try to push — this will FAIL
+git push origin main
+```
+
+You'll see:
+```
+! [rejected]  main -> main (fetch first)
+error: failed to push some refs to 'origin'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally.
+```
+
+**Fix it (Option A — merge approach):**
+```bash
+git pull origin main        # fetch + merge the remote commit
+git push origin main        # now push succeeds
+```
+
+**Fix it (Option B — rebase approach, cleaner history):**
+```bash
+git pull --rebase origin main    # fetch + rebase your commit on top
+git push origin main
+```
+
+- [ ] **Done** when `git push origin main` succeeds after the fix
+- [ ] **Done** when `git log --oneline` shows both commits (the remote one AND yours)
+
+> [!WARNING]
+> Never use `git push --force` to solve a rejected push on a shared branch. It erases the remote commit. Always fetch/pull first, resolve any conflicts, then push.
+
+---
+
+### Exercise 5 — Full Pull Request Cycle
+Practice the complete team workflow: branch → commit → push → PR → merge → sync.
+
+**Task:**
+```bash
+# 1. Create a feature branch
+git switch -c feature/pr-practice
+
+# 2. Add meaningful work
+echo "# PR Practice" > pr-notes.txt
+echo "This file was created through a PR workflow." >> pr-notes.txt
+git add pr-notes.txt
+git commit -m "docs: add PR practice notes"
+
+# 3. Push the branch
+git push -u origin feature/pr-practice
+```
+
+On GitHub:
+4. GitHub shows a "Compare & pull request" banner — click it
+5. Write a PR title: `docs: add PR practice notes`
+6. Write a description explaining what the PR does
+7. Click **Create pull request**
+8. Review the "Files changed" tab — see your diff
+9. Click **Merge pull request** → **Confirm merge**
+10. Click **Delete branch** (good hygiene)
+
+Back in your terminal:
+```bash
+# 11. Sync your local main with the merged PR
+git switch main
+git pull origin main
+git branch -d feature/pr-practice   # Delete local branch too
+
+# 12. Verify
+git log --oneline -3
+```
+
+- [ ] **Done** when `git log --oneline` on local main shows the PR commit at the top
+
+---
+
+### Exercise 6 — Track a Remote Branch That Already Exists
+Practice connecting a local branch to an existing remote branch.
+
+**Task:**
+1. Create a branch directly on GitHub (use the branch dropdown → type a new name → press Enter)
+2. Name it `feature/github-created`
+
+Back in terminal:
+```bash
+# Fetch the new remote branch (it doesn't exist locally yet)
+git fetch origin
+
+# Create a local branch that tracks the remote one
+git switch --track origin/feature/github-created
+# or equivalently:
+# git checkout -b feature/github-created origin/feature/github-created
+
+# Verify tracking is set up
+git branch -vv
+# Output shows: feature/github-created ... [origin/feature/github-created]
+```
+
+- [ ] **Done** when `git branch -vv` shows the tracking relationship in brackets
+
+---
+
+### 🎯 Module 03 Self-Assessment
+
+| Challenge | Confident? |
+|---|:---:|
+| Verify and fix a remote URL | ☐ Yes ☐ Need practice |
+| Push a specific branch (not main) | ☐ Yes ☐ Need practice |
+| Explain the difference between fetch and pull | ☐ Yes ☐ Need practice |
+| Recover from a rejected push without force-push | ☐ Yes ☐ Need practice |
+| Open, review, merge, and clean up a Pull Request | ☐ Yes ☐ Need practice |
+| Set up tracking between a local and remote branch | ☐ Yes ☐ Need practice |
+
+---
+
 <div align="center">
 
 | ← Previous | Home | Next → |

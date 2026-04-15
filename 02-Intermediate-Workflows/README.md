@@ -247,6 +247,237 @@ Your `wip.txt` is back, staged and ready.
 
 ---
 
+## 5. 🏋️ Practice Exercises
+
+> Branching is the most-used Git skill in professional teams. These exercises simulate real scenarios you will encounter on the job.
+
+---
+
+### Exercise 1 — Branch Isolation Proof
+Prove to yourself that branches are truly isolated.
+
+**Setup:**
+```bash
+mkdir branch-isolation && cd branch-isolation
+git init
+echo "# Main project" > README.md
+git add README.md && git commit -m "init: project start"
+```
+
+**Task:**
+```bash
+# Create a feature branch
+git switch -c feature/secret-work
+
+# Create files on the feature branch
+echo "This is secret work" > secret.txt
+echo "More secret work" > secret2.txt
+git add . && git commit -m "feat: add secret work files"
+
+# Switch back to main
+git switch main
+ls    # <-- What do you see?
+```
+
+- [ ] **Done** when you confirm `secret.txt` and `secret2.txt` are **gone** on main — they exist only on the feature branch
+
+**Insight:** The files didn't disappear — they're safely stored in the feature branch. Switch back to see them: `git switch feature/secret-work && ls`
+
+---
+
+### Exercise 2 — Force a Fast-Forward Merge
+Create the exact conditions for a fast-forward merge and observe the output message.
+
+**Task** (continue in `branch-isolation/`):
+```bash
+git switch main
+
+# Make sure main has NO new commits since branching
+# (if it does, this won't fast-forward — that's the point)
+
+git merge feature/secret-work
+```
+
+- [ ] **Done** when the merge output says `Fast-forward` (not "Merge made by...")
+
+```bash
+git log --oneline --graph --all
+```
+
+Notice: the graph is a **straight line** — no merge commit was created. The main branch pointer simply moved forward.
+
+---
+
+### Exercise 3 — Force a 3-Way Merge (Create a Conflict's Friend)
+Now create the conditions where fast-forward is **impossible** and observe the merge commit.
+
+**Task:**
+```bash
+mkdir three-way && cd three-way
+git init
+echo "Line 1" > file.txt && git add . && git commit -m "init"
+
+# Create a feature branch
+git switch -c feature/add-content
+echo "Feature line" >> file.txt && git add . && git commit -m "feat: add feature line"
+
+# Switch back to main and add a DIFFERENT commit
+git switch main
+echo "Main update" > main-only.txt && git add . && git commit -m "docs: main update"
+
+# Now merge — fast-forward is IMPOSSIBLE because main moved forward
+git merge feature/add-content
+```
+
+- [ ] **Done** when Git opens an editor for a merge commit message (or creates one automatically)
+- [ ] `git log --oneline --graph --all` shows a **forked graph** with a merge commit at the tip
+
+---
+
+### Exercise 4 — Create and Resolve a Merge Conflict
+A conflict is not a crisis — it's Git asking you a question. Practice resolving one.
+
+**Task:**
+```bash
+mkdir conflict-practice && cd conflict-practice
+git init
+echo "The sky is blue" > sky.txt
+git add sky.txt && git commit -m "init: describe sky"
+
+# Branch 1 changes the sky
+git switch -c branch-a
+sed -i 's/blue/bright blue/' sky.txt
+git add sky.txt && git commit -m "feat: sky is bright blue"
+
+# Back to main, make a conflicting change
+git switch main
+sed -i 's/blue/deep blue/' sky.txt
+git add sky.txt && git commit -m "feat: sky is deep blue"
+
+# Merge — this WILL conflict
+git merge branch-a
+```
+
+You'll see:
+```
+CONFLICT (content): Merge conflict in sky.txt
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+Open `sky.txt` in your editor. You'll see:
+```
+<<<<<<< HEAD
+The sky is deep blue
+=======
+The sky is bright blue
+>>>>>>> branch-a
+```
+
+**Resolve it:** Edit the file to your preferred version, remove the conflict markers:
+```bash
+echo "The sky is deep bright blue" > sky.txt
+git add sky.txt
+git commit -m "merge: resolve sky color conflict"
+```
+
+- [ ] **Done** when `git status` is clean and `git log --oneline --graph` shows the merge commit
+
+> [!NOTE]
+> `<<<<<<<`, `=======`, and `>>>>>>>` are conflict markers. Everything between `<<<<<<< HEAD` and `=======` is your version. Everything between `=======` and `>>>>>>>` is the incoming branch's version. You decide what the final version should be.
+
+---
+
+### Exercise 5 — The Stash Rescue
+Simulate an urgent interruption during feature work. Use stash to save and restore.
+
+**Scenario:** You're mid-feature on `feature/login`. An urgent bug needs fixing on `main`. You're not ready to commit the feature work yet.
+
+**Task:**
+```bash
+mkdir stash-rescue && cd stash-rescue
+git init
+echo "App v1" > app.txt
+git add . && git commit -m "init: app v1"
+
+# Start feature work (DO NOT COMMIT YET)
+git switch -c feature/login
+echo "Login form HTML" > login.html
+echo "Login CSS styles" > login.css
+git add login.html  # Stage one file, leave the other unstaged
+
+# URGENT: bug reported on main! Stash everything
+git stash
+git status   # Working directory is CLEAN — safe to switch
+
+# Fix the bug on main
+git switch main
+echo "Bug fix" > bugfix.txt
+git add bugfix.txt && git commit -m "fix: critical bug"
+
+# Return to feature work and restore stash
+git switch feature/login
+git stash pop
+git status   # login.html and login.css are back
+```
+
+- [ ] **Done** when `login.html` is staged and `login.css` is untracked after `git stash pop`
+
+> [!TIP]
+> `git stash` saves both staged and unstaged changes. When you `pop`, staged files come back as untracked (Git doesn't remember they were staged). Use `git stash pop --index` to restore the staged/unstaged split exactly as it was.
+
+---
+
+### Exercise 6 — List and Manage Multiple Stashes
+Practice working with a stash stack (more than one stash).
+
+**Task:**
+```bash
+mkdir multi-stash && cd multi-stash
+git init && echo "base" > base.txt && git add . && git commit -m "init"
+
+# Create stash 1
+echo "work A" > a.txt && git stash
+
+# Create stash 2  
+echo "work B" > b.txt && git stash
+
+# Create stash 3
+echo "work C" > c.txt && git stash
+
+# List all stashes
+git stash list
+# stash@{0}: WIP on main: ... work C  ← most recent = 0
+# stash@{1}: WIP on main: ... work B
+# stash@{2}: WIP on main: ... work A  ← oldest = highest number
+
+# Apply stash 1 (work B) WITHOUT removing it from the stack
+git stash apply stash@{1}
+
+# Drop stash 2 (work A) without applying it
+git stash drop stash@{2}
+
+# See what's left
+git stash list
+```
+
+- [ ] **Done** when `git stash list` shows 2 stashes and `b.txt` exists in your working directory
+
+---
+
+### 🎯 Module 02 Self-Assessment
+
+| Challenge | Confident? |
+|---|:---:|
+| Create a branch and switch to it (both modern and legacy syntax) | ☐ Yes ☐ Need practice |
+| Explain why fast-forward only works in certain conditions | ☐ Yes ☐ Need practice |
+| Explain the three "ways" in a 3-way merge | ☐ Yes ☐ Need practice |
+| Resolve a merge conflict from start to finish | ☐ Yes ☐ Need practice |
+| Use `git stash` to save mid-work and restore it | ☐ Yes ☐ Need practice |
+| List multiple stashes and apply a specific one | ☐ Yes ☐ Need practice |
+| Delete a fully-merged branch | ☐ Yes ☐ Need practice |
+
+---
+
 <div align="center">
 
 | ← Previous | Home | Next → |

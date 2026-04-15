@@ -237,6 +237,279 @@ Congratulations! You've deployed a site and automated your first workflow. This 
 
 ---
 
+## 5. 🏋️ Practice Exercises
+
+> These exercises connect your Git skills to the GitHub platform. Each one is something a real developer does in their first week at a new job.
+
+---
+
+### Exercise 1 — Write Your First GitHub Actions Workflow
+Automate a simple task that runs every time you push code.
+
+**Task:** Create a workflow that prints your name on every push.
+
+```bash
+# In your repo:
+mkdir -p .github/workflows
+```
+
+Create `.github/workflows/greet.yml`:
+```yaml
+name: Hello, Developer!
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Greet the developer
+        run: |
+          echo "=============================="
+          echo "Hello! Push received on main."
+          echo "Triggered by: ${{ github.actor }}"
+          echo "Commit SHA: ${{ github.sha }}"
+          echo "=============================="
+
+      - name: Show repository contents
+        run: ls -la
+```
+
+Commit and push:
+```bash
+git add .github/
+git commit -m "ci: add greeting workflow"
+git push origin main
+```
+
+- [ ] **Done** when the **Actions** tab on GitHub shows a green checkmark for this workflow
+- [ ] Click into the run and find your name in the output (`github.actor`)
+
+---
+
+### Exercise 2 — Add a Status Badge to Your README
+Display your workflow's live status directly in your README.
+
+**Task:** Add a badge that shows whether your CI is passing or failing.
+
+1. On GitHub, go to **Actions** → click your workflow → click the `...` menu → **Create status badge**
+2. Copy the generated Markdown
+3. Paste it at the top of your `README.md` in the badges section
+
+It looks like:
+```markdown
+[![Hello, Developer!](https://github.com/abhishek01dev/Git-Github/actions/workflows/greet.yml/badge.svg)](https://github.com/abhishek01dev/Git-Github/actions/workflows/greet.yml)
+```
+
+```bash
+git add README.md
+git commit -m "docs: add CI status badge to README"
+git push origin main
+```
+
+- [ ] **Done** when your README on GitHub shows a live green "passing" badge
+
+---
+
+### Exercise 3 — Deploy a Real Page with GitHub Pages
+Turn your markdown files into a live website anyone can visit.
+
+**Task:**
+
+```bash
+# Create the docs folder
+mkdir docs
+
+# Add an index page
+cat > docs/index.md << 'EOF'
+# My Git Learning Journey
+
+I'm learning Git and GitHub through the GIT&GITHUB course.
+
+## Progress
+- [x] Module 00 — Introduction
+- [x] Module 01 — Foundations
+- [x] Module 02 — Intermediate Workflows
+- [x] Module 03 — Remote Collaboration
+- [x] Module 04 — Advanced Git
+- [x] Module 05 — GitHub Expertise
+
+## What I've learned
+Git is a distributed version control system. Every commit is immutable.
+EOF
+
+git add docs/
+git commit -m "docs: add GitHub Pages index with learning progress"
+git push origin main
+```
+
+On GitHub:
+1. **Settings** → **Pages**
+2. Source: **Deploy from a branch**
+3. Branch: `main`, Folder: `/docs`
+4. Click **Save**
+
+Wait 2 minutes, then visit:
+```
+https://abhishek01dev.github.io/Git-Github
+```
+
+- [ ] **Done** when you can access your live page in a browser
+- [ ] Share the URL — it's publicly accessible without login
+
+---
+
+### Exercise 4 — Use Issues to Track Work
+Open an Issue, reference it in a commit, and automatically close it via a PR.
+
+**Task:**
+
+**Step 1 — Create an Issue on GitHub:**
+1. Go to **Issues** → **New Issue**
+2. Title: `Add a FAQ section to README`
+3. Description: `The README needs a FAQ section explaining common Git questions.`
+4. Submit the Issue — note its number (e.g., `#7`)
+
+**Step 2 — Create a branch and fix the issue:**
+```bash
+git switch -c fix/issue-7-faq
+cat >> README.md << 'EOF'
+
+## FAQ
+
+**Q: Do I need to commit every file?**
+A: No. The staging area lets you choose exactly which changes to commit.
+
+**Q: Can I undo a commit?**
+A: Yes. Use `git reset HEAD^` to undo the last commit while keeping changes.
+EOF
+
+git add README.md
+git commit -m "docs: add FAQ section — closes #7"
+# ↑ "closes #7" will auto-close the Issue when this PR is merged
+git push -u origin fix/issue-7-faq
+```
+
+**Step 3 — Open a PR:**
+- On GitHub, create a PR from `fix/issue-7-faq` to `main`
+- In the PR description, write: `Closes #7`
+
+**Step 4 — Merge the PR.**
+
+- [ ] **Done** when Issue `#7` automatically shows as **Closed** after the PR is merged
+- [ ] Notice: GitHub links the Issue and PR together in the timeline
+
+> [!TIP]
+> Keywords that auto-close issues when a PR merges: `closes`, `fixes`, `resolves` followed by `#<issue-number>`. Works in the commit message OR the PR description.
+
+---
+
+### Exercise 5 — Create a Wiki Page
+Add documentation to your repo's Wiki that's separate from your code.
+
+**Task:**
+
+1. On GitHub, click **Wiki** tab → **Create the first page**
+2. Title: `Architecture Notes`
+3. Content:
+```markdown
+# Architecture Notes
+
+## Repository Structure
+This repo uses a module-based structure where each folder contains
+a complete learning unit with theory, diagrams, commands, and a lab.
+
+## Naming Conventions
+- Module folders: `00-ModuleName/`
+- Practice logs: `YYYY-MM-DD_Day-N_log.md`
+- Feature branches: `feature/description`
+- Fix branches: `fix/description`
+
+## Commit Message Prefixes
+| Prefix | Meaning |
+|---|---|
+| `feat:` | New feature or content |
+| `fix:` | Bug fix or correction |
+| `docs:` | Documentation update |
+| `ci:` | GitHub Actions change |
+| `log:` | Practice log entry |
+```
+4. Click **Save Page**
+
+Now clone the wiki as its own Git repo:
+```bash
+git clone https://github.com/abhishek01dev/Git-Github.wiki.git
+ls Git-Github.wiki/   # You'll see your wiki page as a .md file
+```
+
+- [ ] **Done** when the wiki page is visible on GitHub
+- [ ] **Done** when you've successfully cloned the wiki locally
+
+---
+
+### Exercise 6 — Set Up a GitHub Project Board
+Create a Kanban board to track your remaining learning tasks.
+
+**Task:**
+
+1. On GitHub, click **Projects** → **New project**
+2. Choose **Board** template
+3. Name it: `GIT&GITHUB Learning Progress`
+4. Add columns: `To Do` / `In Progress` / `Done`
+
+Add these cards to **To Do**:
+- `Complete Module 00 exercises`
+- `Complete Module 01 exercises`
+- `Complete Module 02 exercises`
+- `Complete Module 03 exercises`
+- `Complete Module 04 exercises`
+- `Complete Module 05 exercises`
+- `Start 30-day practice log`
+
+Move the Module 05 card to **Done** right now (you're doing it!).
+
+- [ ] **Done** when the board exists with at least 7 cards
+- [ ] Link the Project to your repository: Project settings → **Linked repositories** → add your repo
+
+---
+
+### 🎯 Module 05 Self-Assessment
+
+| Challenge | Confident? |
+|---|:---:|
+| Create a GitHub Actions workflow from scratch | ☐ Yes ☐ Need practice |
+| Add a live status badge to a README | ☐ Yes ☐ Need practice |
+| Enable and deploy GitHub Pages from `/docs` | ☐ Yes ☐ Need practice |
+| Open an Issue and auto-close it via a PR | ☐ Yes ☐ Need practice |
+| Create and clone a Wiki repo | ☐ Yes ☐ Need practice |
+| Set up a GitHub Project board | ☐ Yes ☐ Need practice |
+| Explain the difference between Git and GitHub | ☐ Yes ☐ Need practice |
+
+---
+
+### 🏆 Course Complete!
+
+You've finished all 6 modules. Here's what you can now do:
+
+- ✅ Install, configure, and use Git from scratch
+- ✅ Stage selectively, commit atomically, read history
+- ✅ Branch, merge, and resolve conflicts
+- ✅ Work with remote repositories and Pull Requests
+- ✅ Rebase, cherry-pick, and recover from mistakes
+- ✅ Automate workflows and publish with GitHub
+
+**Your next step:** Head to the [Practice Lab](../Practice-Lab/README.md) and start your 30-day daily practice log. The skills become permanent through repetition — not through reading.
+
+---
+
 <div align="center">
 
 | ← Previous | Home | Next → |
