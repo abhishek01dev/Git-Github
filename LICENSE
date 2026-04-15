@@ -1,0 +1,58 @@
+MIT License
+
+Copyright (c) 2026 Git-Mastery-Hub Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## What This License Means
+
+You are FREE to:
+
+  ✓ Use this project for personal learning — forever, at no cost
+  ✓ Use it in a classroom or corporate training environment
+  ✓ Fork it and create your own version
+  ✓ Modify the content for your specific needs
+  ✓ Distribute copies to others
+  ✓ Build on it commercially (e.g., use it as the basis for a paid course)
+  ✓ Publish derivative works under any license you choose
+
+You MUST:
+
+  ✓ Include this copyright notice and license text in any copy or substantial
+    portion of the work
+
+You are NOT:
+
+  ✗ Required to share your modifications back (though PRs are welcome!)
+  ✗ Required to credit the original authors in your own derived work's UI
+    (though attribution is appreciated)
+  ✗ Able to hold the contributors liable for anything
+
+---
+
+## Attribution (Optional but Appreciated)
+
+If this project helped you, a mention goes a long way:
+
+  "Based on Git-Mastery-Hub (https://github.com/YOUR-USERNAME/Git-Mastery-Hub),
+   MIT License"
+
+Or simply star the repository on GitHub. It helps others find it.
